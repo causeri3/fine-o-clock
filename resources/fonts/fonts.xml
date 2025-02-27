@@ -1,0 +1,4 @@
+<fonts>
+    <font id="TIFFontLarge" filename="tifBig.fnt"/>
+    <font id="TIFFontTiny" filename="tifTiny.fnt"/>
+</fonts>
