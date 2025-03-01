@@ -3,6 +3,7 @@ import Toybox.Lang;
 import Toybox.System;
 import Toybox.WatchUi;
 import Toybox.ActivityMonitor;
+import Toybox.Time.Gregorian;
 
 class finoclockView extends WatchUi.WatchFace {
     private var mBackground as BitmapResource?;   
@@ -189,6 +190,16 @@ class finoclockView extends WatchUi.WatchFace {
         // (240x240 screen = center at 120,120)
         dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
         dc.drawText(133, 30, TIFFontLarge, timeString, Graphics.TEXT_JUSTIFY_CENTER);
+
+        // date
+        var now = Gregorian.info(Time.now(), Time.FORMAT_MEDIUM);
+        var dateString = Lang.format(
+            "$1$ $2$",
+            [now.day_of_week, now.day]
+            );
+        dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
+        dc.drawText(120, 6, TIFFontTiny, dateString, Graphics.TEXT_JUSTIFY_CENTER);
+
 
         drawHeartRate(dc);
         drawStressLevel(dc);
