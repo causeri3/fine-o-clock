@@ -18,8 +18,8 @@ class finoclockView extends WatchUi.WatchFace {
     
         dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
     
-        var x = 80;
-        var y = 10;
+        var x = 30;
+        var y = 65;
         var w_body = 20;
         var h_body = 10;
         var w_tip = 2;
@@ -97,7 +97,7 @@ class finoclockView extends WatchUi.WatchFace {
     function drawStressLevel(dc as Dc) as Void {
       var stressLevel = getStressLevel(dc);
       dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
-      dc.drawText(185, 135, TIFFontTiny, stressLevel, Graphics.TEXT_JUSTIFY_CENTER);
+      dc.drawText(185, 140, TIFFontTiny, stressLevel, Graphics.TEXT_JUSTIFY_CENTER);
     }
 
     private function getStressLevel(dc as Dc) as String {
@@ -184,11 +184,10 @@ class finoclockView extends WatchUi.WatchFace {
         // background 
         dc.drawBitmap(0, 0, mBackground);
         // time 
-        dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
         var clockTime = System.getClockTime();
         var timeString = Lang.format("$1$:$2$", [clockTime.hour, clockTime.min.format("%02d")]);
-    
         // (240x240 screen = center at 120,120)
+        dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
         dc.drawText(133, 30, TIFFontLarge, timeString, Graphics.TEXT_JUSTIFY_CENTER);
 
         drawHeartRate(dc);
