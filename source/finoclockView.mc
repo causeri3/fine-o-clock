@@ -212,11 +212,6 @@ class finoclockView extends WatchUi.WatchFace {
     function onEnterSleep() as Void {
     }
 
-    function onBackgroundData(data) as Void {
-        // Request a redraw when backlight state changes
-        WatchUi.requestUpdate();
-    }
-
 }
 
 
@@ -228,4 +223,3 @@ class finoclockView extends WatchUi.WatchFace {
 // own launcher icon?
 // date
 // an screen lighten up? - double check implementation on device - didnt work
-// compare why my stress data takes lomnger to get 0 than hers
