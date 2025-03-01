@@ -9,9 +9,6 @@ class finoclockView extends WatchUi.WatchFace {
     private var mBackground as BitmapResource?;   
     private var TIFFontLarge;      
     private var TIFFontTiny;  
-    // private var _lastValue = null;
-    // private var _lastChangeTime = 0; 
-    // private var _secondsElapsed = 0;
 
     function drawBattery(dc as Dc) {
         var stats = System.getSystemStats();
@@ -137,45 +134,9 @@ class finoclockView extends WatchUi.WatchFace {
     
 
     private function getLatestStressLevelFromSensorHistory(dc as Dc) as String {
-
-        // debugging to see array - which shows often missing values. 
-        // Last 5 values retrieved, can be verything form 5 to 0, while device on
-        // Seems to be some unvalid calculations, since it also happens when sensordata is coming in
-        // If I use Toybox.SensorHistory.getStressHistory({:period => 1}) it leads to missing values displayed
-        // If I use Toybox.SensorHistory.getStressHistory({:period => 5}), 
-        // it will fall back on up to the last 5 values, so less missing values but up to 15 minutes to update
-        
-        // var stressIterator1 = getStressIterator();
-        // var stressLevels = []; 
-        // while (stressLevels.size() < 5) {
-        //     var stressSample = stressIterator1.next();
-        //     if (stressSample != null && stressSample.data != null) {
-        //         stressLevels.add(stressSample.data.format("%i"));
-        //         Log.debug("Sample: " + stressSample.data);
-        //     } else {
-        //     break;
-        //     }
-        // }
-        // dc.drawText(110, 80, TIFFontTiny,  stressLevels.toString(), Graphics.TEXT_JUSTIFY_CENTER);
-
         // takes mostly plus minus 3 minutes to get a new stress value
         var stressIterator = getStressIterator();
         var sample = stressIterator.next();  
-
-        // I saw be everything from 120 to 500 sec - mostly it took 3 minutes
-        // if (sample != null && sample.data != null) {
-        //     if (sample.data != _lastValue) {  
-        //         var currentTime = System.getTimer(); 
-            
-        //         if (_lastChangeTime > 0) {
-        //             _secondsElapsed = (currentTime - _lastChangeTime) / 1000.0;
-        //         }
-        //         _lastChangeTime = currentTime;
-        //     }
-        //     _lastValue = sample.data;
-        // }
-        // dc.drawText(145, 210, TIFFontTiny,  _secondsElapsed.format("%i"), Graphics.TEXT_JUSTIFY_CENTER);
-
        return (sample != null && sample.data != null) ? sample.data.format("%i") : "";
     }
 
