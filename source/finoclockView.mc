@@ -33,7 +33,7 @@ class finoclockView extends WatchUi.WatchFace {
         }
         var fillWidth = (battery / 100.0) * 18;  // Scale battery level to fit
         dc.fillRectangle(x + 1, y + 1, fillWidth, h_body - 2);
-        }
+    }
 
 
     function initialize() {
@@ -93,12 +93,12 @@ class finoclockView extends WatchUi.WatchFace {
     }
 
     function drawStressLevel(dc as Dc) as Void {
-      var stressLevel = getStressLevel(dc);
+      var stressLevel = getStressLevel();
       dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
       dc.drawText(185, 140, TIFFontTiny, stressLevel, Graphics.TEXT_JUSTIFY_CENTER);
     }
 
-    private function getStressLevel(dc as Dc) as String {
+    private function getStressLevel() as String {
         var stressLevel = null;
     
         // real-time data
@@ -116,7 +116,7 @@ class finoclockView extends WatchUi.WatchFace {
     
         // fall back to sensor history - takes around 3 min to update value
         if (stressLevel == null) {
-        stressLevel = getLatestStressLevelFromSensorHistory(dc);
+        stressLevel = getLatestStressLevelFromSensorHistory();
         Log.debug("Stress from SensorHistory: " + stressLevel);
 
         return stressLevel;
@@ -133,7 +133,7 @@ class finoclockView extends WatchUi.WatchFace {
     }
     
 
-    private function getLatestStressLevelFromSensorHistory(dc as Dc) as String {
+    private function getLatestStressLevelFromSensorHistory() as String {
         // takes mostly plus minus 3 minutes to get a new stress value
         var stressIterator = getStressIterator();
         var sample = stressIterator.next();  
@@ -184,6 +184,7 @@ class finoclockView extends WatchUi.WatchFace {
     }
 
 }
+
 
 
 // todo
