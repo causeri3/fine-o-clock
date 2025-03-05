@@ -1,6 +1,12 @@
 import Toybox.Lang;
 import Toybox.ActivityMonitor;
 import Toybox.Activity;
+import Toybox.Time.Gregorian;
+import Toybox.System;
+import Toybox.Graphics;
+import Toybox.WatchUi;
+import Toybox.Time;
+
 
 
 function getHeartRate() as String {
@@ -70,4 +76,20 @@ function getLatestStressLevelFromSensorHistory() as String {
     var stressIterator = getStressIterator();
     var sample = stressIterator.next();  
     return (sample != null && sample.data != null) ? sample.data.format("%i") : "";
+}
+
+
+function getDate() as String {
+    var now = Gregorian.info(Time.now(), Time.FORMAT_MEDIUM);
+    var dateString = Lang.format(
+        "$1$ $2$",
+        [now.day_of_week, now.day]
+        );
+    return dateString;
+}
+
+function getTime() as String {
+    var clockTime = System.getClockTime();
+    var timeString = Lang.format("$1$:$2$", [clockTime.hour, clockTime.min.format("%02d")]);
+    return timeString;
 }
