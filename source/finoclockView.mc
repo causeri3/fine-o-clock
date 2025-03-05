@@ -5,6 +5,7 @@ import Toybox.WatchUi;
 import Toybox.ActivityMonitor;
 import Toybox.Time.Gregorian;
 
+
 class finoclockView extends WatchUi.WatchFace {
     private var mBackground as BitmapResource?;   
     private var TIFFontLarge;      
@@ -67,79 +68,11 @@ class finoclockView extends WatchUi.WatchFace {
 
     }
 
-    private function getHeartRate() as String {
-        var heartRate = null;
-        // real-time data
-        var info = Activity.getActivityInfo();
-        if (info != null && info.currentHeartRate != null) {
-            heartRate = info.currentHeartRate.format("%i");
-            Log.debug("HR from ActivityMonitor: " + heartRate);
-            return heartRate;
-        }
-
-        // fall back to heart rate history if no current HR, 
-        // get last sample, working with Time.Duration led to crashes, stopped digging deeper
-        // var hrIterator = ActivityMonitor.getHeartRateHistory(Time.Duration(6, true);
-
-        var hrIterator = ActivityMonitor.getHeartRateHistory(1, true);
-        var sample = hrIterator.next();
-        if (sample != null && sample.heartRate != ActivityMonitor.INVALID_HR_SAMPLE) {
-            heartRate = sample.heartRate.format("%i");
-            Log.debug("HR from getHeartRateHistory: " + heartRate);
-            return heartRate;
-        }
-
-        return "";
-    }
-
     function drawStressLevel(dc as Dc) as Void {
       var stressLevel = getStressLevel();
       dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
       dc.drawText(185, 140, TIFFontTiny, stressLevel, Graphics.TEXT_JUSTIFY_CENTER);
     }
-
-    private function getStressLevel() as String {
-        var stressLevel = null;
-    
-        // real-time data
-        // API Level 5.0.0 - not for e.g. descentmk2s
-        if (ActivityMonitor.Info has :stressScore) {
-        var activityInfo = ActivityMonitor.getInfo();
-
-        if (activityInfo.stressScore != null) {
-            stressLevel = activityInfo.stressScore.toDouble();
-            Log.debug("Stress from ActivityMonitor: " + stressLevel);
-
-            return stressLevel.format("%i");
-            }
-        }
-    
-        // fall back to sensor history - takes around 3 min to update value
-        if (stressLevel == null) {
-        stressLevel = getLatestStressLevelFromSensorHistory();
-        Log.debug("Stress from SensorHistory: " + stressLevel);
-
-        return stressLevel;
-        }
-        return "";
-    }
-
-    function getStressIterator() {
-      // Check device for SensorHistory compatibility
-      if ((Toybox has :SensorHistory) && (Toybox.SensorHistory has :getStressHistory)) {
-          return Toybox.SensorHistory.getStressHistory({:period => 1});
-      }
-      return null;
-    }
-    
-
-    private function getLatestStressLevelFromSensorHistory() as String {
-        // takes mostly plus minus 3 minutes to get a new stress value
-        var stressIterator = getStressIterator();
-        var sample = stressIterator.next();  
-       return (sample != null && sample.data != null) ? sample.data.format("%i") : "";
-    }
-
 
     function onUpdate(dc as Dc) as Void {
 
@@ -189,9 +122,4 @@ class finoclockView extends WatchUi.WatchFace {
 
 // todo
 // clock in layout file?
-// functions in sperate file
 // settings?
-// clean up drawables folder
-// own launcher icon?
-// date
-// an screen lighten up? - double check implementation on device - didnt work
