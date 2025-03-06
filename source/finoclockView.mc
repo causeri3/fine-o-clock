@@ -1,10 +1,11 @@
 import Toybox.Graphics;
 import Toybox.WatchUi;
 import Toybox.Math;
+import Toybox.Lang;
+
 
 
 class finoclockView extends WatchUi.WatchFace {
-    //private var mBackground as BitmapResource?;   
     private var drawings as Drawings;
     var imageIndex = 0;
     var timer;
@@ -121,8 +122,10 @@ class finoclockView extends WatchUi.WatchFace {
 
     function updateAnimationState() {
         var stressLevel = getStressLevel();
+        // == doesnt work with strings in Monkey c - Java like
+        stressLevel = stressLevel.equals("") ? 0 as Number : stressLevel.toNumber();
 
-        if (stressLevel == "" || stressLevel.toNumber() < 50) {
+        if (stressLevel < 50) {
             stopAnimation();
             // free the previous image to save memory
             currentImage = null;
