@@ -10,7 +10,7 @@ class finoclockView extends WatchUi.WatchFace {
     function initialize() {
         WatchFace.initialize();
         // background image
-        mBackground = Application.loadResource(Rez.Drawables.Meme) as BitmapResource;
+        mBackground = Application.loadResource(Rez.Drawables.stillPic) as BitmapResource;
         // font
         // TIFFontLarge = WatchUi.loadResource(Rez.Fonts.TIFFontLarge);
         // TIFFontTiny = WatchUi.loadResource(Rez.Fonts.TIFFontTiny);
@@ -35,10 +35,10 @@ class finoclockView extends WatchUi.WatchFace {
         dc.drawBitmap(0, 0, mBackground);
 
         drawings.init(dc);
-        drawings.drawTime(dc);
-        drawings.drawDate(dc);
-        drawings.drawHeartRate(dc);
-        drawings.drawStressLevel(dc);
+        drawings.drawBubble(dc);
+        drawings.drawClouds(dc);
+        drawings.drawHeart(dc);
+        drawings.drawCup(dc);
         drawings.drawBattery(dc);
 
     }

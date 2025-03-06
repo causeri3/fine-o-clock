@@ -12,7 +12,7 @@ class Drawings{
         y = dc.getHeight(); 
     }
 
-    function drawHeartRate(dc as Dc) as Void {
+    function drawHeart(dc as Dc) as Void {
       var heartRate = getHeartRate();
       dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
       dc.drawText(.46*x, .55*y, TIFFontTiny, "♥", Graphics.TEXT_JUSTIFY_RIGHT);
@@ -20,7 +20,7 @@ class Drawings{
 
     }
 
-    function drawStressLevel(dc as Dc) as Void {
+    function drawCup(dc as Dc) as Void {
       var stressLevel = getStressLevel();
       dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
       dc.drawText(.76*x, .58*y, TIFFontTiny, stressLevel, Graphics.TEXT_JUSTIFY_CENTER);
@@ -52,13 +52,13 @@ class Drawings{
         dc.fillRectangle(_x + 1, _y + 1, fillWidth, h_body - 2);
     }
     
-    function drawTime(dc as Dc) {
+    function drawBubble(dc as Dc) {
         var time = getTime();
         dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
         dc.drawText(.55*x, .125*y, TIFFontLarge, time, Graphics.TEXT_JUSTIFY_CENTER);
     }
 
-    function drawDate(dc as Dc) as Void {
+    function drawClouds(dc as Dc) as Void {
         var date = getDate();
         dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
         dc.drawText(0.5*x, .025*y, TIFFontTiny, date, Graphics.TEXT_JUSTIFY_CENTER);
