@@ -4,12 +4,14 @@ import Toybox.Math;
 
 
 class finoclockView extends WatchUi.WatchFace {
-    private var mBackground as BitmapResource?;   
+    //private var mBackground as BitmapResource?;   
     private var drawings as Drawings;
     var imageIndex = 0;
     var timer;
     var isAnimating = false;
+    var timerTriggered = false;
     var currentImage;
+
 
     function initialize() {
         WatchFace.initialize();
@@ -21,7 +23,6 @@ class finoclockView extends WatchUi.WatchFace {
     // Load your resources here
     function onLayout(dc as Dc) as Void {
         //setLayout(Rez.Layouts.WatchFace(dc));
-        // mBackground = Application.loadResource(Rez.Drawables.stillPic) as BitmapResource;
     }
 
 
@@ -30,21 +31,35 @@ class finoclockView extends WatchUi.WatchFace {
     // loading resources into memory.
     function onShow() as Void {
         Log.debug("In onShow");
-        startAnimation();
+        updateAnimationState();
     }
 
-    function onUpdate(dc as Dc) as Void {
-        // background 
-        // dc.drawBitmap(0, 0, mBackground);
-
+    function update_drawings(dc as Dc)as Void{
         drawBackground(dc);
-
         drawings.init(dc);
         drawings.drawBubble(dc);
         drawings.drawClouds(dc);
         drawings.drawHeart(dc);
         drawings.drawCup(dc);
         drawings.drawBattery(dc);
+    }
+
+    function onUpdate(dc as Dc) as Void {
+        if(timerTriggered && isAnimating){
+            update_drawings(dc);
+            Log.debug("timerTriggered Update");
+            timerTriggered = false;
+        }
+        else if(!timerTriggered && !isAnimating){
+            update_drawings(dc);
+            Log.debug("Regular Update");
+
+        }
+        else{
+            Log.debug("DONT UPDATE");
+        }
+
+        updateAnimationState();
 
     }
 
@@ -52,14 +67,12 @@ class finoclockView extends WatchUi.WatchFace {
     // state of this View here. This includes freeing resources from
     // memory.
     function onHide() as Void {
-        // mBackground = null; // depends if I want the picture stay loaded in memory while other functions or delete and reload - trade off
         stopAnimation();
     }
 
     // The user has just looked at their watch. Timers and animations may be started here.
     function onExitSleep() as Void {
-        Log.debug("In onExitSleep");
-        startAnimation();
+        updateAnimationState();
     }
 
     // Terminate any active timers and prepare for slow updates.
@@ -95,6 +108,8 @@ class finoclockView extends WatchUi.WatchFace {
     } 
 
     function restartAnimationTimer() {
+    Log.debug("restartAnimationTimer() is being called.");
+
     if (timer != null) {
         timer.stop();
         // random intervall felt more organic to me
@@ -104,12 +119,25 @@ class finoclockView extends WatchUi.WatchFace {
         }
     }
 
+    function updateAnimationState() {
+        var stressLevel = getStressLevel();
+
+        if (stressLevel == "" || stressLevel.toNumber() < 50) {
+            stopAnimation();
+            // free the previous image to save memory
+            currentImage = null;
+            currentImage = Application.loadResource(Rez.Drawables.stillPic) as BitmapResource;
+        } else {
+            startAnimation();
+        }
+
+    }
+
     function startAnimation() {
         if (timer != null && !isAnimating) {
             isAnimating = true;
-            restartAnimationTimer();
-        }
-        Log.debug("In isAnimating: " + isAnimating);
+            restartAnimationTimer();        
+            }
     }
 
     function stopAnimation() {
@@ -120,19 +148,15 @@ class finoclockView extends WatchUi.WatchFace {
     }
 
     function switchBackground() {
-        if (isAnimating) {
-            // Free the previous image to save memory
-            currentImage = null;
+        // free the previous image to save memory
+        currentImage = null;
+        imageIndex = (imageIndex + 1) % 4;
+        currentImage = loadImage(imageIndex);
+        restartAnimationTimer();
+        timerTriggered = true;
+        requestUpdate();
 
-            // Load the next image
-            imageIndex = (imageIndex + 1) % 4;
-            currentImage = loadImage(imageIndex);
-
-            requestUpdate();
-            restartAnimationTimer();
-        }
     }
-
 
 }
 
