@@ -1,10 +1,7 @@
 import Toybox.Lang;
 import Toybox.ActivityMonitor;
 import Toybox.Activity;
-import Toybox.Time.Gregorian;
 import Toybox.System;
-import Toybox.Graphics;
-import Toybox.WatchUi;
 import Toybox.Time;
 
 

@@ -1,8 +1,5 @@
 import Toybox.Graphics;
-import Toybox.System;
-import Toybox.WatchUi;
-import Toybox.ActivityMonitor;
-import Toybox.Time.Gregorian;
+
 
 class Drawings{
     private var TIFFontTiny = WatchUi.loadResource(Rez.Fonts.TIFFontTiny);

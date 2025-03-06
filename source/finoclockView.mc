@@ -1,9 +1,6 @@
 import Toybox.Graphics;
-import Toybox.Lang;
-import Toybox.System;
 import Toybox.WatchUi;
-import Toybox.ActivityMonitor;
-import Toybox.Time.Gregorian;
+
 
 class finoclockView extends WatchUi.WatchFace {
     private var mBackground as BitmapResource?;   
