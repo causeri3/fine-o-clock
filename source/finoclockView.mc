@@ -11,6 +11,7 @@ class finoclockView extends WatchUi.WatchFace {
     var timer;
     var isAnimating = false;
     var timerTriggered = false;
+    var sleep = false;
     var currentImage;
 
 
@@ -32,6 +33,7 @@ class finoclockView extends WatchUi.WatchFace {
     // loading resources into memory.
     function onShow() as Void {
         Log.debug("In onShow");
+        sleep = false;
         updateAnimationState();
     }
 
@@ -51,16 +53,19 @@ class finoclockView extends WatchUi.WatchFace {
             Log.debug("timerTriggered Update");
             timerTriggered = false;
         }
-        else if(!timerTriggered && !isAnimating){
+        else if((!timerTriggered && !isAnimating) || sleep){
             update_drawings(dc);
             Log.debug("Regular Update");
-
         }
         else{
             Log.debug("DONT UPDATE");
         }
 
-        updateAnimationState();
+        if (!sleep){
+            updateAnimationState();
+        }
+
+
 
     }
 
@@ -73,11 +78,13 @@ class finoclockView extends WatchUi.WatchFace {
 
     // The user has just looked at their watch. Timers and animations may be started here.
     function onExitSleep() as Void {
-        updateAnimationState();
+        // not sure if needed
+        sleep = false;
     }
 
     // Terminate any active timers and prepare for slow updates.
     function onEnterSleep() as Void {
+        sleep = true;
         stopAnimation();
     }
 
@@ -147,6 +154,7 @@ class finoclockView extends WatchUi.WatchFace {
         if (timer != null && isAnimating) {
             isAnimating = false;
             timer.stop();
+            timerTriggered = false;
         }
     }
 
