@@ -23,7 +23,7 @@ function getHeartRate() as String {
     var sample = hrIterator.next();
     if (sample != null && sample.heartRate != ActivityMonitor.INVALID_HR_SAMPLE) {
         heartRate = sample.heartRate.format("%i");
-        Log.debug("HR from getHeartRateHistory: " + heartRate);
+        Log.debug("HR from HeartRateHistory: " + heartRate);
         return heartRate;
     }
 
