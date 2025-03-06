@@ -36,6 +36,7 @@ class finoclockView extends WatchUi.WatchFace {
         // background 
         dc.drawBitmap(0, 0, mBackground);
 
+        drawings.init(dc);
         drawings.drawTime(dc);
         drawings.drawDate(dc);
         drawings.drawHeartRate(dc);
