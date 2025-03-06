@@ -4,8 +4,6 @@ import Toybox.WatchUi;
 
 class finoclockView extends WatchUi.WatchFace {
     private var mBackground as BitmapResource?;   
-    private var TIFFontLarge;      
-    private var TIFFontTiny;  
     private var drawings as Drawings;
 
 
