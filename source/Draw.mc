@@ -1,4 +1,6 @@
 import Toybox.Graphics;
+// import Toybox.WatchUi;
+
 
 
 class Drawings{
@@ -6,10 +8,11 @@ class Drawings{
     private var TIFFontLarge = WatchUi.loadResource(Rez.Fonts.TIFFontLarge);
     var x; 
     var y; 
-
+    
     function init(dc as Dc) as Void {
         x = dc.getWidth(); 
         y = dc.getHeight(); 
+        Settings.getProperties();
     }
 
     function drawHeart(dc as Dc) as Void {
@@ -58,9 +61,32 @@ class Drawings{
         dc.drawText(.55*x, .125*y, TIFFontLarge, time, Graphics.TEXT_JUSTIFY_CENTER);
     }
 
-    function drawClouds(dc as Dc) as Void {
-        var date = getDate();
+    function drawSmoke(dc as Dc) as Void {
+        // var date = getDate();
+        // dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
+        // dc.drawText(0.5*x, .025*y, TIFFontTiny, date, Graphics.TEXT_JUSTIFY_CENTER);
+
+        Log.debug("smokeSetting: " + Settings.smokeSetting);
+
+        var smokeValue;
+        if (Settings.smokeSetting == 1) {
+            smokeValue = getCalories().toString();
+        } else {
+            smokeValue = getDate();
+        }
+    
+        
         dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
-        dc.drawText(0.5*x, .025*y, TIFFontTiny, date, Graphics.TEXT_JUSTIFY_CENTER);
+        dc.drawText(0.5*x, .025*y, TIFFontTiny, smokeValue, Graphics.TEXT_JUSTIFY_CENTER);
+
+
+        // findDrawableById("smoke_field").setText(displayValue).setFont(TIFFontTiny);
+//         var label = View.findDrawableById("smoke_field") as Text;
+// if (label != null) {
+//     label.setFont(Rez.Fonts.TIFFontTiny);
+//     label.setText(displayValue);
+// }
+
+
     }
 }

@@ -20,6 +20,16 @@ class finoclockApp extends Application.AppBase {
     function getInitialView() as [Views] or [Views, InputDelegates] {
         return [ new finoclockView() ];
     }
+    
+    // New app settings have been received so trigger a UI update
+    function onSettingsChanged() as Void{
+        Settings.getProperties();
+        WatchUi.requestUpdate();
+    }
+
+//     function getSettingsView() {
+//         return [ new finoclockView() ];
+//   }
 
 }
 
