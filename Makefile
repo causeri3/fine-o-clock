@@ -39,6 +39,13 @@ run:
 	sleep 6 &&\
 	$(SDK_HOME)/bin/monkeydo bin/$(appName).prg $(DEVICE)
 
+run.settings: 
+	-pkill -f connectiq || true
+	$(SDK_HOME)/bin/connectiq &&\
+	sleep 6 &&\
+	$(SDK_HOME)/bin/monkeydo bin/$(appName).prg $(DEVICE) -a bin/$(appName)-settings.json:GARMIN/Settings/$(appName)-settings.json
+
+
 clean:
 	rm -rf bin/*.prg
 	rm -rf bin/*.iq
