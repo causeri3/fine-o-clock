@@ -90,3 +90,9 @@ function getTime() as String {
     var timeString = Lang.format("$1$:$2$", [clockTime.hour, clockTime.min.format("%02d")]);
     return timeString;
 }
+
+
+function getCalories() {
+    var activityInfo = ActivityMonitor.getInfo();
+    return activityInfo.calories; //.toDouble();
+    }
