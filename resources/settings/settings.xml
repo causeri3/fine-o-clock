@@ -1,0 +1,8 @@
+<settings>
+    <setting propertyKey="@Properties.smokeField" title="@Strings.smokeField">
+        <settingConfig type="list">
+            <listEntry value="0">@Strings.date</listEntry>
+            <listEntry value="1">@Strings.calories</listEntry>
+        </settingConfig>
+    </setting>
+</settings>
