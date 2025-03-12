@@ -18,15 +18,6 @@ class Menu extends WatchUi.Menu2 {
     }
 }
 
-  // function getSmokeFieldString(fieldId) {
-  //   if (fieldId == 0) {
-  //     return Rez.Strings.date;
-  //   } else if (fieldId == 1) {
-  //     return Rez.Strings.calories;
-  //   }
-  //   return "";
-  // }
-   
 
 
 class MenuDelegate extends WatchUi.Menu2InputDelegate {
@@ -37,8 +28,6 @@ class MenuDelegate extends WatchUi.Menu2InputDelegate {
 
   function onSelect(item) {
 
-    //System.println(item.getId());
-    
     if (item.getId().equals("smoke")) {
        pushOptionsMenu(item);
           
@@ -81,8 +70,11 @@ class MenuDelegate extends WatchUi.Menu2InputDelegate {
    }
 
    function onSelect(item) {
-    WatchUi.popView(WatchUi.SLIDE_RIGHT);                                                                                                                                               
-   }
+    var chosenValue = item.getId().toInteger();
+    Application.Properties.setValue("smokeField", chosenValue);
+    Settings.getProperties();
+    WatchUi.popView(WatchUi.SLIDE_RIGHT);
+    }
 
    function onBack() {
     WatchUi.popView(WatchUi.SLIDE_RIGHT);                                                                                                                                    
