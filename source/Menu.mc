@@ -1,7 +1,7 @@
 import Toybox.WatchUi;
 import Toybox.Graphics;
-import Toybox.Math;
 import Toybox.Lang;
+
 
 class Menu extends WatchUi.Menu2 {
 
@@ -72,7 +72,8 @@ class MenuDelegate extends WatchUi.Menu2InputDelegate {
    }
 
    function onSelect(item) {
-    var chosenValue = item.getId().toNumber();
+    var chosenValue = item.getId().toString().toNumber();
+    Log.debug("SETTING " + chosenValue);
     Application.Properties.setValue("smokeField", chosenValue);
     Settings.getProperties();
     WatchUi.popView(WatchUi.SLIDE_RIGHT);
