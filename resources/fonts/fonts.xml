@@ -1,4 +1,4 @@
 <fonts>
     <font id="TIFFontLarge" filename="tifBig.fnt"/>
-    <font id="TIFFontTiny" filename="tifTiny.fnt"/>
+    <font id="TIFFontSmall" filename="tifSmall.fnt"/>
 </fonts>
