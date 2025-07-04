@@ -6,32 +6,29 @@ module Settings {
     var smokeSetting;
     var bubbleSetting;
     var cupSetting;
+    var heartSetting;
     var stressScoreSetting;
     var caloriesGoal;
+    var animationSetting;
 
     function getProperties(){
         smokeSetting = Application.Properties.getValue("smokeField");
+        heartSetting = Application.Properties.getValue("heartField");
         bubbleSetting = Application.Properties.getValue("bubbleField");
         cupSetting = Application.Properties.getValue("cupField");
         stressScoreSetting = Application.Properties.getValue("stressThreshold");
         caloriesGoal = Application.Properties.getValue("caloriesGoal");
+        animationSetting = Application.Properties.getValue("animationSetting");
     }
-
-    const stressThresholds = {
-        0 => Rez.Strings.none,
-        1 => Rez.Strings.stress,
-        2 => Rez.Strings.calories,
-        3 => Rez.Strings.date,
-        4 => Rez.Strings.time,
-        5 => Rez.Strings.thisisfine,
 
     const fieldsMap = {
         0 => Rez.Strings.none,
-        1 => Rez.Strings.stress,
-        2 => Rez.Strings.calories,
-        3 => Rez.Strings.date,
-        4 => Rez.Strings.time,
-        5 => Rez.Strings.thisisfine,
+        1 => Rez.Strings.heart,
+        2 => Rez.Strings.stress,
+        3 => Rez.Strings.calories,
+        4 => Rez.Strings.date,
+        5 => Rez.Strings.time,
+        6 => Rez.Strings.thisisfine,
     };
 
     function getFieldResource(fieldId){
