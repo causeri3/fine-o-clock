@@ -1,32 +1,48 @@
 import Toybox.Graphics;
-// import Toybox.WatchUi;
+import Toybox.WatchUi;
+import Toybox.Lang;
+// import Toybox.System;
+// import Toybox.WatchUi.View;
 
 
 
-class Drawings{
-    private var TIFFontTiny = WatchUi.loadResource(Rez.Fonts.TIFFontTiny);
+class Fields{
+    private var TIFFontSmall = WatchUi.loadResource(Rez.Fonts.TIFFontSmall);
     private var TIFFontLarge = WatchUi.loadResource(Rez.Fonts.TIFFontLarge);
-    var x; 
-    var y; 
+
+    //   function initialize() {
+    //     WatchFace.initialize();
+    // }
+
+    private var x; 
+    private var y; 
     
-    function init(dc as Dc) as Void {
+    function init(dc as Dc){
         x = dc.getWidth(); 
         y = dc.getHeight(); 
         Settings.getProperties();
     }
 
     function drawHeart(dc as Dc) as Void {
-      var heartRate = getHeartRate();
-      dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
-      dc.drawText(.46*x, .55*y, TIFFontTiny, "♥", Graphics.TEXT_JUSTIFY_RIGHT);
-      dc.drawText(.48*x, .6*y, TIFFontTiny, heartRate, Graphics.TEXT_JUSTIFY_RIGHT);
+
+        var heartRate = getHeartRate();
+        var heartSettingString = Settings.getFieldString(Settings.heartSetting);
+        var heartValue = choose_field(heartSettingString);
+        if (heartValue.equals("")) {
+        } 
+        else {
+        dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
+        dc.drawText(.46*x, .55*y, TIFFontSmall, "♥", Graphics.TEXT_JUSTIFY_RIGHT);
+        dc.drawText(.48*x, .6*y, TIFFontSmall, heartRate, Graphics.TEXT_JUSTIFY_RIGHT);
+        }
 
     }
 
     function drawCup(dc as Dc) as Void {
-      var stressLevel = getStressLevel();
-      dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
-      dc.drawText(.76*x, .58*y, TIFFontTiny, stressLevel, Graphics.TEXT_JUSTIFY_CENTER);
+        var cupSettingString = Settings.getFieldString(Settings.cupSetting);
+        var cupValue = choose_field(cupSettingString);
+        dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
+        dc.drawText(.76*x, .58*y, TIFFontSmall, cupValue, Graphics.TEXT_JUSTIFY_CENTER);
     }
 
 
@@ -56,37 +72,60 @@ class Drawings{
     }
     
     function drawBubble(dc as Dc) {
-        var time = getTime();
+        var bubbleSettingString = Settings.getFieldString(Settings.bubbleSetting);
+        var bubbleValue = choose_field(bubbleSettingString);
         dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
-        dc.drawText(.55*x, .125*y, TIFFontLarge, time, Graphics.TEXT_JUSTIFY_CENTER);
+        if (bubbleValue.equals("This is Fine")) {
+            dc.drawText(.55*x, .125*y, TIFFontSmall, bubbleValue, Graphics.TEXT_JUSTIFY_CENTER);
+        }
+        else {
+            dc.drawText(.55*x, .125*y, TIFFontLarge, bubbleValue, Graphics.TEXT_JUSTIFY_CENTER);
+        }
     }
 
     function drawSmoke(dc as Dc) as Void {
-        // var date = getDate();
-        // dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
-        // dc.drawText(0.5*x, .025*y, TIFFontTiny, date, Graphics.TEXT_JUSTIFY_CENTER);
-
-        Log.debug("smokeSetting: " + Settings.smokeSetting);
-
-        var smokeValue;
-        if (Settings.smokeSetting == 1) {
-            smokeValue = getCalories().toString();
-        } else {
-            smokeValue = getDate();
-        }
-    
-        
+        var smokeSettingString = Settings.getFieldString(Settings.smokeSetting);
+        var smokeValue = choose_field(smokeSettingString);
         dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
-        dc.drawText(0.5*x, .025*y, TIFFontTiny, smokeValue, Graphics.TEXT_JUSTIFY_CENTER);
+        dc.drawText(0.5*x, .025*y, TIFFontSmall, smokeValue, Graphics.TEXT_JUSTIFY_CENTER);
 
+    }
 
-        // findDrawableById("smoke_field").setText(displayValue).setFont(TIFFontTiny);
-//         var label = View.findDrawableById("smoke_field") as Text;
-// if (label != null) {
-//     label.setFont(Rez.Fonts.TIFFontTiny);
-//     label.setText(displayValue);
-// }
+    function choose_field(settingString) as String{
+        var settingValue;
+        
+        if (settingString.equals("Calories")) {
+            settingValue = getCalories().toString();
+        } 
+        else if (settingString.equals("Stress Level")) {
+            settingValue = getStressLevel();
+        }
+        else if (settingString.equals("Date")) {
+            settingValue = getDate();
+        }
+        else if (settingString.equals("Time")) {
+            settingValue = getTime();
+        }
+        else if (settingString.equals("This is Fine")) {
+            settingValue = "This is Fine";
+        }
+        else if (settingString.equals("Heart Rate")) {
+            settingValue = getHeartRate();
+        }
+        else if (settingString.equals("None")) {
+            settingValue = "";
+        }
+        else {
+            settingValue = "";
+        }
+        return settingValue;
+    }
 
-
+    function update_fields(dc as Dc) as Void{
+        drawBubble(dc);
+        drawSmoke(dc);
+        drawHeart(dc);
+        drawCup(dc);
+        drawBattery(dc);
     }
 }
