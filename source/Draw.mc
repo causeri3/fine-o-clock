@@ -100,6 +100,12 @@ class Fields{
         else if (settingString.equals("Stress Level")) {
             settingValue = getStressLevel();
         }
+        else if (settingString.equals("Body Battery")) {
+            settingValue = getBodyBattery();
+        }
+        else if (settingString.equals("Calories Percentage")) {
+            settingValue = getCaloriesProgress();
+        }
         else if (settingString.equals("Date")) {
             settingValue = getDate();
         }

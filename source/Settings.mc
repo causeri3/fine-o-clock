@@ -29,6 +29,8 @@ module Settings {
         4 => Rez.Strings.date,
         5 => Rez.Strings.time,
         6 => Rez.Strings.thisisfine,
+        7 => Rez.Strings.body,
+        8 => Rez.Strings.caloriesPerc,
     };
 
     function getFieldResource(fieldId){
