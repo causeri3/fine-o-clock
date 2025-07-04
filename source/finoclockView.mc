@@ -1,17 +1,14 @@
 import Toybox.Graphics;
 import Toybox.WatchUi;
-import Toybox.Math;
 import Toybox.Lang;
 
-
-class finoclockView extends WatchUi.WatchFace {
-    private var drawings as Drawings;
+class finoclockView extends WatchUi.WatchFace{
+    private var fields as Fields;
     private var animation as BackgroundAnimation;
 
-
-
     function initialize() {
-        drawings = new Drawings();
+        // Fields.initialize();
+        fields = new Fields();
         animation = new BackgroundAnimation();
         animation.setAnimationTimer();
     }
@@ -19,6 +16,7 @@ class finoclockView extends WatchUi.WatchFace {
 
     // Load your resources here
     function onLayout(dc as Dc) as Void {
+        fields.init(dc);
         //setLayout(Rez.Layouts.WatchFace(dc));
     }
 
@@ -32,33 +30,18 @@ class finoclockView extends WatchUi.WatchFace {
         animation.updateAnimationState();
     }
 
-    function update_drawings(dc as Dc)as Void{
-        animation.drawBackground(dc);
-        drawings.init(dc);
-        drawings.drawBubble(dc);
-        drawings.drawClouds(dc);
-        drawings.drawHeart(dc);
-        drawings.drawCup(dc);
-        drawings.drawBattery(dc);
-    }
-
 
     function onUpdate(dc as Dc) as Void {
-        if(animation.timerTriggered && animation.isAnimating){
-            update_drawings(dc);
-            Log.debug("timerTriggered Update");
-            animation.timerTriggered = false;
-        }
-        else if((!animation.timerTriggered && !animation.isAnimating) || animation.sleep){
-            update_drawings(dc);
-            Log.debug("Regular Update");
-        }
+        if (Settings.animationSetting) { 
+            Log.debug("Animatiion is set on ON");
+            ifAnimationOn(dc);
+            }
         else{
-            Log.debug("DONT UPDATE");
-        }
-
-        if (!animation.sleep){
-            animation.updateAnimationState();
+            Log.debug("Animatiion is set on OFF");
+            if (animation.isAnimating) {
+                animation.stopAnimation();
+            }
+            basicUpdate(dc);
         }
 
     }
@@ -82,10 +65,44 @@ class finoclockView extends WatchUi.WatchFace {
         animation.stopAnimation();
     }
 
+    hidden function ifAnimationOn(dc) as Void {
+        if(animation.timerTriggered && animation.isAnimating){
+            animation.drawBackground(dc);
+            fields.update_fields(dc);
+            Log.debug("Timer Triggered Update - Animation");
+            animation.timerTriggered = false;
+        }
+        else if((!animation.timerTriggered && !animation.isAnimating) || animation.sleep){
+            basicUpdate(dc);
+        }
+        else{
+            Log.debug("Don't Update - Animation Runs on Timer");
+        }
+
+        if (!animation.sleep){
+            animation.updateAnimationState();
+        }
+    }
+
+    hidden function basicUpdate(dc) as Void {
+        animation.drawBackground(dc);
+        fields.update_fields(dc);
+        Log.debug("Regular Update - No Animation");
+    }
+
 }
 
 
 
 // todo
-// clock in layout file?
-// settings?
+// Fetch: HRV, Body Battery, Steps, Active Minutes
+// Customize Fields (also enable to delete the field - This is fine for bubble)
+// set stress levelthreshold setting
+// font in layout file? also x="30%"
+// settings, Simulator Settings->Trigger App Settings (Customize) Menu2
+// extrend Drawings with extends WatchUi.WatchFace and finoclockView with Drawings
+
+///////////////////////////////////////
+// font size this is fine on bubble
+// calorie goal setting?
+// Fetch body battery, calc % calories, put in both settings
