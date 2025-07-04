@@ -9,7 +9,7 @@ class BackgroundAnimation {
     var isAnimating = false;
     var timerTriggered = false;
     var sleep = false;
-    var STRESS_THRESHOLD = 30;
+    //var STRESS_THRESHOLD = 50;
 
     function drawBackground(dc) {
         if (currentImage == null) {
@@ -55,7 +55,7 @@ class BackgroundAnimation {
         // == doesnt work with strings in Monkey c - Java like
         stressLevel = stressLevel.equals("") ? 0 as Number : stressLevel.toNumber();
 
-        if (stressLevel < STRESS_THRESHOLD) {
+        if (stressLevel < Settings.stressScoreSetting) {
             stopAnimation();
             // free the previous image to save memory
             currentImage = null;
