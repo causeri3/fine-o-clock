@@ -8,6 +8,8 @@
             <listEntry value="4">@Strings.date</listEntry>
             <listEntry value="5">@Strings.time</listEntry>
             <listEntry value="6">@Strings.thisisfine</listEntry>
+            <listEntry value="7">@Strings.body</listEntry>
+            <listEntry value="8">@Strings.caloriesPerc</listEntry>
         </settingConfig>
     </setting>
 
@@ -20,6 +22,9 @@
             <listEntry value="4">@Strings.date</listEntry>
             <listEntry value="5">@Strings.time</listEntry>
             <listEntry value="6">@Strings.thisisfine</listEntry>
+            <listEntry value="7">@Strings.body</listEntry>
+            <listEntry value="8">@Strings.caloriesPerc</listEntry>
+
         </settingConfig>
     </setting>
 
@@ -27,6 +32,8 @@
         <settingConfig type="list">
             <listEntry value="0">@Strings.none</listEntry>
             <listEntry value="2">@Strings.stress</listEntry>
+            <listEntry value="7">@Strings.body</listEntry>
+            <listEntry value="8">@Strings.caloriesPerc</listEntry>
         </settingConfig>
     </setting>
 

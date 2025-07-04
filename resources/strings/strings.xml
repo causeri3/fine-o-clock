@@ -11,7 +11,9 @@
     <string id="time">Time</string>
     <string id="heart">Heart Rate</string>
     <string id="stress">Stress Level</string>
+    <string id="body">Body Battery</string>
     <string id="thisisfine">This is Fine</string>
+    <string id="caloriesPerc">Calories Percentage</string>
     <string id="caloriesGoal">Calories Goal</string>
     <string id="stressThreshold">Stress Threshold Animation</string>
     <string id="animationSetting">Animation</string>                                                                   
