@@ -33,11 +33,11 @@ class finoclockView extends WatchUi.WatchFace{
 
     function onUpdate(dc as Dc) as Void {
         if (Settings.animationSetting) { 
-            Log.debug("Animatiion is set on ON");
+            Log.debug("Animation is set on ON");
             ifAnimationOn(dc);
             }
         else{
-            Log.debug("Animatiion is set on OFF");
+            Log.debug("Animation is set on OFF");
             if (animation.isAnimating) {
                 animation.stopAnimation();
             }
