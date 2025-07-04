@@ -3,7 +3,7 @@ import Toybox.ActivityMonitor;
 import Toybox.Activity;
 import Toybox.System;
 import Toybox.Time;
-
+import Toybox.SensorHistory;
 
 
 function getHeartRate() as String {
@@ -59,7 +59,7 @@ function getStressLevel() as String {
 
 function getStressIterator() {
     // Check device for SensorHistory compatibility
-    if ((Toybox has :SensorHistory) && (Toybox.SensorHistory has :getStressHistory)) {
+    if ((Toybox has :SensorHistory) && (SensorHistory has :getStressHistory)) {
     // get only last value, array would be posisble here, stress gives often null back,
     // array would mean more values to fall back, so less empty field and longer updating time
         return Toybox.SensorHistory.getStressHistory({:period => 1});
@@ -95,4 +95,31 @@ function getTime() as String {
 function getCalories() {
     var activityInfo = ActivityMonitor.getInfo();
     return activityInfo.calories; //.toDouble();
+}
+
+
+function getBodyBattery() {
+    var bodyBattery = null;
+    if (Toybox has :SensorHistory && SensorHistory has :getBodyBatteryHistory) {
+        var iterator = SensorHistory.getBodyBatteryHistory({ :period => 1 });
+        bodyBattery = iterator.next();    
     }
+    if (bodyBattery != null) {
+        bodyBattery = bodyBattery.data.format("%i");
+    }
+    
+    return bodyBattery;
+}
+
+
+function getCaloriesProgress() {
+    var goal = Settings.caloriesGoal;
+    var calories = getCalories();
+
+    if (goal > 0 && calories != null) {
+        var progress = calories.toFloat() / goal.toFloat();
+
+        return (progress > 1.0) ? 100 : (progress * 100).format("%.0f"); // round not only format
+    }
+    return 0; 
+}
