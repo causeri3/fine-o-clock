@@ -1,6 +1,20 @@
 <strings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://developer.garmin.com/downloads/connect-iq/resources.xsd">
     <string id="AppName">finoclock</string>
+    <string id="none">None</string>
     <string id="smokeField">Smoke Field</string>
+    <string id="bubbleField">Bubble Field</string>
+    <string id="cupField">Cup Field</string>
+    <string id="heartField">Heart Field</string>
+    <string id="stressThreshold">Stress Threshold</string>
     <string id="date">Date</string>
     <string id="calories">Calories</string>
+    <string id="time">Time</string>
+    <string id="heart">Heart Rate</string>
+    <string id="stress">Stress Level</string>
+    <string id="thisisfine">This is Fine</string>
+    <string id="caloriesGoal">Calories Goal</string>
+    <string id="stressThreshold">Stress Threshold Animation</string>
+    <string id="animationSetting">Animation</string>                                                                   
+    <string id="on">On</string>                                                                                        
+    <string id="off">Off</string>  
 </strings>

@@ -1,8 +1,52 @@
 <settings>
     <setting propertyKey="@Properties.smokeField" title="@Strings.smokeField">
         <settingConfig type="list">
-            <listEntry value="0">@Strings.date</listEntry>
-            <listEntry value="1">@Strings.calories</listEntry>
+            <listEntry value="0">@Strings.none</listEntry>
+            <listEntry value="1">@Strings.heart</listEntry>
+            <listEntry value="2">@Strings.stress</listEntry>
+            <listEntry value="3">@Strings.calories</listEntry>
+            <listEntry value="4">@Strings.date</listEntry>
+            <listEntry value="5">@Strings.time</listEntry>
+            <listEntry value="6">@Strings.thisisfine</listEntry>
         </settingConfig>
     </setting>
+
+    <setting propertyKey="@Properties.bubbleField" title="@Strings.bubbleField">
+        <settingConfig type="list">
+            <listEntry value="0">@Strings.none</listEntry>
+            <listEntry value="1">@Strings.heart</listEntry>
+            <listEntry value="2">@Strings.stress</listEntry>
+            <listEntry value="3">@Strings.calories</listEntry>
+            <listEntry value="4">@Strings.date</listEntry>
+            <listEntry value="5">@Strings.time</listEntry>
+            <listEntry value="6">@Strings.thisisfine</listEntry>
+        </settingConfig>
+    </setting>
+
+    <setting propertyKey="@Properties.cupField" title="@Strings.cupField">
+        <settingConfig type="list">
+            <listEntry value="0">@Strings.none</listEntry>
+            <listEntry value="2">@Strings.stress</listEntry>
+        </settingConfig>
+    </setting>
+
+    <setting propertyKey="@Properties.heartField" title="@Strings.heartField">
+        <settingConfig type="list">
+            <listEntry value="0">@Strings.none</listEntry>
+            <listEntry value="1">@Strings.heart</listEntry>
+        </settingConfig>
+    </setting>
+
+    <setting propertyKey="@Properties.caloriesGoal" title="@Strings.caloriesGoal">
+        <settingConfig type="numeric" min="1" max="10000" required="true"/>
+    </setting>
+
+    <setting propertyKey="@Properties.stressThreshold" title="@Strings.stressThreshold">
+        <settingConfig type="numeric" min="0" max="100" required="true"/>
+   </setting>
+
+    <setting propertyKey="@Properties.animationSetting" title="@Strings.animationSetting">
+    <settingConfig type="boolean" required="true"/>
+  </setting>
+
 </settings>
