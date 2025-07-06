@@ -33,7 +33,7 @@ You can also:
 ### Installations
 
 - [Garmin Connect IQ SDK](https://developer.garmin.com/connect-iq/reference-guides/monkey-c-command-line-setup/) - follow the steps in the link for your operating system
-- *VS Code* or *Curser* with the *Monkey C E✓tension*
+- *VS Code* or *Curser* with the *Monkey C Extension*
 - [Java Development Kit (JDK)](https://www.oracle.com/java/technologies/javase-downloads.html)
 
 
