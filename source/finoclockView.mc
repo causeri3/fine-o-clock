@@ -95,14 +95,11 @@ class finoclockView extends WatchUi.WatchFace{
 
 
 // todo
-// Fetch: HRV, Body Battery, Steps, Active Minutes
-// Customize Fields (also enable to delete the field - This is fine for bubble)
-// set stress levelthreshold setting
+
+// ??
 // font in layout file? also x="30%"
-// settings, Simulator Settings->Trigger App Settings (Customize) Menu2
 // extrend Drawings with extends WatchUi.WatchFace and finoclockView with Drawings
 
 ///////////////////////////////////////
-// font size this is fine on bubble
-// calorie goal setting?
-// Fetch body battery, calc % calories, put in both settings
+// font size this is fine on bubble and smoke
+// third font - tiny
