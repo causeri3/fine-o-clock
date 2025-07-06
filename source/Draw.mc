@@ -9,6 +9,8 @@ import Toybox.Lang;
 class Fields{
     private var TIFFontSmall = WatchUi.loadResource(Rez.Fonts.TIFFontSmall);
     private var TIFFontLarge = WatchUi.loadResource(Rez.Fonts.TIFFontLarge);
+    private var TIFFontTiny = WatchUi.loadResource(Rez.Fonts.TIFFontTiny);
+
 
     //   function initialize() {
     //     WatchFace.initialize();
@@ -76,7 +78,7 @@ class Fields{
         var bubbleValue = choose_field(bubbleSettingString);
         dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
         if (bubbleValue.equals("This is Fine")) {
-            dc.drawText(.55*x, .125*y, TIFFontSmall, bubbleValue, Graphics.TEXT_JUSTIFY_CENTER);
+            dc.drawText(.55*x, .155*y, TIFFontTiny, bubbleValue, Graphics.TEXT_JUSTIFY_CENTER);
         }
         else {
             dc.drawText(.55*x, .125*y, TIFFontLarge, bubbleValue, Graphics.TEXT_JUSTIFY_CENTER);
@@ -87,7 +89,12 @@ class Fields{
         var smokeSettingString = Settings.getFieldString(Settings.smokeSetting);
         var smokeValue = choose_field(smokeSettingString);
         dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
-        dc.drawText(0.5*x, .025*y, TIFFontSmall, smokeValue, Graphics.TEXT_JUSTIFY_CENTER);
+        if (smokeValue.equals("This is Fine")) {
+            dc.drawText(0.55*x, .045*y, TIFFontTiny, smokeValue, Graphics.TEXT_JUSTIFY_CENTER);
+        }
+        else {
+            dc.drawText(0.5*x, .025*y, TIFFontSmall, smokeValue, Graphics.TEXT_JUSTIFY_CENTER);
+        }
 
     }
 
