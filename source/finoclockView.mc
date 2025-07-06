@@ -91,15 +91,3 @@ class finoclockView extends WatchUi.WatchFace{
     }
 
 }
-
-
-
-// todo
-
-// ??
-// font in layout file? also x="30%"
-// extrend Drawings with extends WatchUi.WatchFace and finoclockView with Drawings
-
-///////////////////////////////////////
-// font size this is fine on bubble and smoke
-// third font - tiny
