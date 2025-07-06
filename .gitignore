@@ -2,5 +2,3 @@ bin/
 **/.DS_Store
 python-helpers/
 .aider*
-.idea*
-properties.mk
