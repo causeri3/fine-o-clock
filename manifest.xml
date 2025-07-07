@@ -69,7 +69,6 @@
             <iq:product id="fr255sm"/>
             <iq:product id="fr265"/>
             <iq:product id="fr265s"/>
-            <iq:product id="fr55"/>
             <iq:product id="fr645"/>
             <iq:product id="fr645m"/>
             <iq:product id="fr745"/>
@@ -78,15 +77,8 @@
             <iq:product id="fr945lte"/>
             <iq:product id="fr955"/>
             <iq:product id="fr965"/>
-            <iq:product id="instinct2"/>
-            <iq:product id="instinct2s"/>
-            <iq:product id="instinct2x"/>
             <iq:product id="instinct3amoled45mm"/>
             <iq:product id="instinct3amoled50mm"/>
-            <iq:product id="instinct3solar45mm"/>
-            <iq:product id="instinctcrossover"/>
-            <iq:product id="instincte40mm"/>
-            <iq:product id="instincte45mm"/>
             <iq:product id="legacyherocaptainmarvel"/>
             <iq:product id="legacyherofirstavenger"/>
             <iq:product id="legacysagadarthvader"/>
@@ -101,7 +93,6 @@
             <iq:product id="marqdriver"/>
             <iq:product id="marqexpedition"/>
             <iq:product id="marqgolfer"/>
-            <iq:product id="system8preview"/>
             <iq:product id="venu"/>
             <iq:product id="venu2"/>
             <iq:product id="venu2plus"/>
@@ -110,8 +101,6 @@
             <iq:product id="venu3s"/>
             <iq:product id="venud"/>
             <iq:product id="venusq"/>
-            <iq:product id="venusq2"/>
-            <iq:product id="venusq2m"/>
             <iq:product id="venusqm"/>
             <iq:product id="vivoactive3"/>
             <iq:product id="vivoactive3m"/>
