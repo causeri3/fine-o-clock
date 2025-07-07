@@ -71,6 +71,9 @@ function getStressIterator() {
 function getLatestStressLevelFromSensorHistory() as String {
     // takes mostly plus minus 3 minutes to get a new stress value
     var stressIterator = getStressIterator();
+    if (stressIterator == null) {
+        return "";
+    }
     var sample = stressIterator.next();  
     return (sample != null && sample.data != null) ? sample.data.format("%i") : "";
 }
@@ -102,13 +105,15 @@ function getBodyBattery() {
     var bodyBattery = null;
     if (Toybox has :SensorHistory && SensorHistory has :getBodyBatteryHistory) {
         var iterator = SensorHistory.getBodyBatteryHistory({ :period => 1 });
-        bodyBattery = iterator.next();    
+        if (iterator != null) {
+            bodyBattery = iterator.next();    
+        }
     }
     if (bodyBattery != null) {
         bodyBattery = bodyBattery.data.format("%i");
+        return bodyBattery;
     }
-    
-    return bodyBattery;
+    return "";
 }
 
 
