@@ -34,13 +34,13 @@ run:
 	-pkill -f connectiq || true
 	$(SDK_HOME)/bin/connectiq &&\
 	sleep 6 &&\
-	$(SDK_HOME)/bin/monkeydo bin/$(appName).prg $(DEVICE)
+	$(SDK_HOME)/bin/monkeydo bin/$(appName)-$(DEVICE).prg $(DEVICE)
 
 run.settings: 
 	-pkill -f connectiq || true
 	$(SDK_HOME)/bin/connectiq &&\
 	sleep 6 &&\
-	$(SDK_HOME)/bin/monkeydo bin/$(appName).prg $(DEVICE) -a bin/$(appName)-settings.json:GARMIN/Settings/$(appName)-settings.json
+	$(SDK_HOME)/bin/monkeydo bin/$(appName)-$(DEVICE).prg $(DEVICE) -a bin/$(appName)-$(DEVICE)-settings.json:GARMIN/Settings/$(appName)-$(DEVICE)-settings.json
 
 
 
@@ -53,6 +53,8 @@ clean:
 
 
 runscreenshotall:
+# mac issue with the dock and screenshots
+	@defaults write com.apple.dock orientation -string left && killall Dock
 	@mkdir -p screenshots
 	@for device in $(devices); do \
 		echo "Screenshot for $$device..."; \
@@ -64,3 +66,20 @@ runscreenshotall:
 		./screenshot.sh $$device; \
 		pkill -f connectiq; \
 	done
+# mac issue with the dock and screenshots
+	@defaults write com.apple.dock orientation -string bottom && killall Dock
+
+runscreenshotone:
+# mac issue with the dock and screenshots
+	@defaults write com.apple.dock orientation -string left && killall Dock
+	@mkdir -p screenshots
+	echo "Screenshot for $(DEVICE)..."; \
+	pkill -f connectiq || true; \
+	$(SDK_HOME)/bin/connectiq & \
+	sleep 4; \
+	$(SDK_HOME)/bin/monkeydo bin/$(appName)-$(DEVICE).prg $(DEVICE) & \
+	sleep 10; \
+	./screenshot.sh $(DEVICE); \
+	pkill -f connectiq; \
+# mac issue with the dock and screenshots
+	@defaults write com.apple.dock orientation -string bottom && killall Dock
