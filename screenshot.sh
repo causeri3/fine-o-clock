@@ -6,9 +6,6 @@ out_file="screenshots/${device_id}.png"
 tmp_file="screenshots/tmp_fullscreen.png"
 
 
-# hide dock
-defaults write com.apple.dock autohide -bool true && killall Dock
-
 # full-screen screenshot
 screencapture -x "$tmp_file"
 
@@ -49,6 +46,3 @@ else
 	echo "Could not find CIQ Simulator window – keeping full screenshot"
 	mv "$tmp_file" "$out_file"
 fi
-
-# stop hiding dock
-defaults write com.apple.dock autohide -bool false && killall Dock
