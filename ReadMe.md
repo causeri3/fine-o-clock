@@ -4,11 +4,10 @@
 With the *this is fine* meme. Time, date, battery life, heart rate and stress level are the default settings. The illustration gets animated once your stress levels reach above 50%.
 
 ---
+<img src="https://github.com/user-attachments/assets/04de3b14-5f53-4958-a29e-e2702e98bd43" width="900"/>
 
-<img src="https://github.com/user-attachments/assets/5c33a1a2-0b9f-4ab7-a9e3-a2d33e2a6409" width="900"/>
 
-
-https://github.com/user-attachments/assets/ed8019fe-a3f1-4893-b8fe-27e455d7e9bc
+https://github.com/user-attachments/assets/80156576-78e5-411a-927e-0950d5551592
 
 
 ---
