@@ -26,7 +26,7 @@ https://github.com/user-attachments/assets/80156576-78e5-411a-927e-0950d5551592
 
 There are four fields you can change the settings for:
 
-|               | Smoke | Bubble | Cup | Body of the Doggo |
+|               | Smoke | Bubble | Cup | Body |
 |------------------------|-----|------|---|-----------------|
 | This is fine           | ✓    | ✓     |     |                   |
 | Date                   | ✓    | ✓     |     |                   |
@@ -35,7 +35,7 @@ There are four fields you can change the settings for:
 | Stress Levels          | ✓    | ✓     | ✓  |                   |
 | % Calorie Goal         | ✓    | ✓     | ✓  |                   |
 | Body Battery           | ✓    | ✓     | ✓  |                   |
-| Heart Rate             | ✓    | ✓     | ✓   | ✓               |
+| Heart Rate             | ✓    | ✓     |    | ✓               |
 | None                   | ✓    | ✓     | ✓  | ✓                |
 
 You can also:
