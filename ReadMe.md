@@ -1,10 +1,19 @@
-# Garmin Watch Face: [Fine'o clock](https://apps.garmin.com/en-US/apps/46e9c768-4eb1-470c-93a8-29dd11219b61)
+# Garmin Watch Face: [Fine'o clock](https://apps.garmin.com/en-US/apps/46e9c768-4eb1-470c-93a8-29dd11219b61) 
 
 
-With the *this is fine* meme. Time, date, battery life, heart rate and stress level are the default settings. The illustration gets animated once your stress levels reach above 50%.
+<table>
+  <tr>
+    <td><img src="https://github.com/user-attachments/assets/7c6ec408-9f7b-4fbd-93ba-6ed820a9935c" width="100"/></td>
+    <td>With the <em>This is Fine</em> meme. Time, date, battery life, heart rate and stress level are the default settings. 
+        The illustration gets animated once your stress levels reach above 50%.</td>
+  </tr>
+</table>
 
 ---
-<img src="https://github.com/user-attachments/assets/04de3b14-5f53-4958-a29e-e2702e98bd43" width="900"/>
+<img src="https://github.com/user-attachments/assets/c79612de-1ab9-46d0-bc3d-2fb17d6307dc" width="900"/>
+
+<img src="https://github.com/user-attachments/assets/339cca41-178c-4579-9ce1-dcf499dd237b" width="900"/>
+
 
 
 https://github.com/user-attachments/assets/80156576-78e5-411a-927e-0950d5551592
