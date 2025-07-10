@@ -3,7 +3,7 @@
 
 <table>
   <tr>
-    <td><img src="https://github.com/user-attachments/assets/7c6ec408-9f7b-4fbd-93ba-6ed820a9935c" width="300"/></td>
+    <td><img src="https://github.com/user-attachments/assets/7c6ec408-9f7b-4fbd-93ba-6ed820a9935c" width="200"/></td>
     <td><em>This is Fine</em> meme. Time, date, battery life, heart rate, and stress level are the default settings. 
         The illustration gets animated once your stress levels reach above 50%.</td>
   </tr>
