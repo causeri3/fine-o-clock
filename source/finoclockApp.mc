@@ -6,6 +6,8 @@ class finoclockApp extends Application.AppBase {
 
     function initialize() {
         AppBase.initialize();
+        Log.debug("AppBase initialized");
+
     }
 
     // onStart() is called on application start up
