@@ -1,3 +1,4 @@
+
 import Toybox.Graphics;
 import Toybox.WatchUi;
 import Toybox.Lang;
@@ -10,7 +11,8 @@ class finoclockView extends WatchUi.WatchFace{
         // Fields.initialize();
         fields = new Fields();
         animation = new BackgroundAnimation();
-        animation.setAnimationTimer();
+        Log.debug("finoclockView initialized");
+
     }
 
 
@@ -26,41 +28,45 @@ class finoclockView extends WatchUi.WatchFace{
     // loading resources into memory.
     function onShow() as Void {
         Log.debug("In onShow");
-        animation.sleep = false;
-        animation.updateAnimationState();
     }
 
 
     function onUpdate(dc as Dc) as Void {
         if (Settings.animationSetting) { 
-            Log.debug("Animation is set on ON");
+            //Log.debug("Animation is set on ON");
             ifAnimationOn(dc);
             }
         else{
-            Log.debug("Animation is set on OFF");
+            //Log.debug("Animation is set on OFF");
             if (animation.isAnimating) {
                 animation.stopAnimation();
             }
             basicUpdate(dc);
         }
-
     }
 
     // Called when this View is removed from the screen. Save the
     // state of this View here. This includes freeing resources from
     // memory.
+    // In Simulator trigger by:  Settings > Force onHide and Settings > Force onShow
     function onHide() as Void {
+        Log.debug("In onHide");
         animation.stopAnimation();
+        animation.sleep = true;
     }
 
     // The user has just looked at their watch. Timers and animations may be started here.
+    // In Simulator trigger by: Settings > Disply Mode > Always on > Toggle Power Mode (ooff and on)
     function onExitSleep() as Void {
-        // not sure if needed
+        Log.debug("onExitSleep");
+        animation.setAnimationTimer();
         animation.sleep = false;
+        animation.updateAnimationState();
     }
 
     // Terminate any active timers and prepare for slow updates.
     function onEnterSleep() as Void {
+        Log.debug("onEnterSleep");
         animation.sleep = true;
         animation.stopAnimation();
     }
@@ -82,6 +88,9 @@ class finoclockView extends WatchUi.WatchFace{
         if (!animation.sleep){
             animation.updateAnimationState();
         }
+        else{
+            Log.debug("Animation is set to sleep");
+        }
     }
 
     hidden function basicUpdate(dc) as Void {
@@ -91,3 +100,6 @@ class finoclockView extends WatchUi.WatchFace{
     }
 
 }
+
+
+
