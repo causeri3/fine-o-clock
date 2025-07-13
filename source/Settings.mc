@@ -11,15 +11,27 @@ module Settings {
     var caloriesGoal;
     var animationSetting;
 
-    function getProperties(){
-        smokeSetting = Application.Properties.getValue("smokeField");
-        heartSetting = Application.Properties.getValue("heartField");
-        bubbleSetting = Application.Properties.getValue("bubbleField");
-        cupSetting = Application.Properties.getValue("cupField");
-        stressScoreSetting = Application.Properties.getValue("stressThreshold");
-        caloriesGoal = Application.Properties.getValue("caloriesGoal");
-        animationSetting = Application.Properties.getValue("animationSetting");
-    }
+
+function getOrDefault(key, defaultValue, expectedType) {
+    var value = Application.Properties.getValue(key);
+    return (value != null && value instanceof expectedType) ? value : defaultValue;
+}
+// default values are workaround for non-reproducable (in the simulator) crash: 
+// Error: Unexpected Type Error\n- **Details**: Failed invoking <symbol>
+// Affected Firmware: 006-B4261-00 (14.15), 006-B3838-00 (5.10), 006-B3704-00 (19.05), 006-B3703-00 (19.05), 006-B3536-00 (8.00), 006-B4532-00 (15.32)
+// in line: var fieldResource = getFieldResource(fieldId);
+
+function getProperties() {
+    smokeSetting        = getOrDefault("smokeField", 4, Lang.Number);
+    heartSetting        = getOrDefault("heartField", 1, Lang.Number);
+    bubbleSetting       = getOrDefault("bubbleField", 5, Lang.Number);
+    cupSetting          = getOrDefault("cupField", 2, Lang.Number);
+    stressScoreSetting  = getOrDefault("stressThreshold", 50, Lang.Number);
+    caloriesGoal        = getOrDefault("caloriesGoal", 2000, Lang.Number);
+    animationSetting    = getOrDefault("animationSetting", true, Lang.Boolean);
+}
+
+
 
     const fieldsMap = {
         0 => Rez.Strings.none,
