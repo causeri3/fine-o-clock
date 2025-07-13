@@ -1,6 +1,8 @@
+
 import Toybox.WatchUi;
 import Toybox.Math;
 import Toybox.Lang;
+import Toybox.System;
 
 class BackgroundAnimation {
     private var imageIndex = 0;
@@ -9,9 +11,9 @@ class BackgroundAnimation {
     var isAnimating = false;
     var timerTriggered = false;
     var sleep = false;
-    //var STRESS_THRESHOLD = 50;
 
     function drawBackground(dc) {
+
         if (currentImage == null) {
             currentImage = loadImage(imageIndex);
         }
@@ -28,10 +30,10 @@ class BackgroundAnimation {
 
 
     function setAnimationTimer() {
-        if (timer == null) {
-            timer = new Timer.Timer();
-        }
-        Log.debug("In setAnimationTimer: " + timer);
+       if (timer == null) {
+           timer = new Timer.Timer();
+       }
+        Log.debug("In setAnimationTimer: " + timer.toString());
     }
 
     function random(min, max) {
@@ -39,14 +41,17 @@ class BackgroundAnimation {
     } 
 
     function restartAnimationTimer() {
-    Log.debug("restartAnimationTimer() is being called.");
+        Log.debug("restartAnimationTimer() is being called.");
 
-    if (timer != null) {
-        timer.stop();
-        // random intervall felt more organic to me
-        var random_intervall = random(400, 600);
-        Log.debug("New random_intervall: " + random_intervall);
-        timer.start(method(:switchBackground), random_intervall, false); 
+        if (timer != null) {
+            //Log.debug("Timer object: " + timer.toString());
+            timer.stop();
+            // random intervall felt more organic to me
+            var random_intervall = random(400, 600);
+            //Log.debug("New random_intervall: " + random_intervall);
+            timer.start(method(:switchBackground), random_intervall, false); 
+        } else {
+            Log.debug("Timer is null in restartAnimationTimer()");
         }
     }
 
@@ -67,6 +72,8 @@ class BackgroundAnimation {
     }
 
     function startAnimation() {
+        Log.debug("in startAnimation: isAnimating is " + isAnimating.toString());
+
         if (timer != null && !isAnimating) {
             isAnimating = true;
             restartAnimationTimer();        
@@ -74,6 +81,8 @@ class BackgroundAnimation {
     }
 
     function stopAnimation() {
+        Log.debug("in stopAnimation: isAnimating is " + isAnimating.toString());
+        Log.debug("timer is null: " + (timer == null).toString());
         if (timer != null && isAnimating) {
             isAnimating = false;
             timer.stop();
@@ -81,7 +90,7 @@ class BackgroundAnimation {
         }
     }
 
-    function switchBackground() {
+    function switchBackground() as Void {
         // free the previous image to save memory
         currentImage = null;
         imageIndex = (imageIndex + 1) % 4;
@@ -91,3 +100,4 @@ class BackgroundAnimation {
         WatchUi.requestUpdate(); 
     }
 }
+
