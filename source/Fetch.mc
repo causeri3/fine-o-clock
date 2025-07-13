@@ -20,6 +20,10 @@ function getHeartRate() as String {
     // get last sample, working with Time.Duration led to crashes, stopped digging deeper
     // var hrIterator = ActivityMonitor.getHeartRateHistory(Time.Duration(6, true);
     var hrIterator = ActivityMonitor.getHeartRateHistory(1, true);
+    // Not sure if it is needed - just more safety
+    if (hrIterator == null) {
+        return "";
+        }
     var sample = hrIterator.next();
     if (sample != null && sample.heartRate != ActivityMonitor.INVALID_HR_SAMPLE) {
         heartRate = sample.heartRate.format("%i");
@@ -32,12 +36,15 @@ function getHeartRate() as String {
 
 
 function getStressLevel() as String {
+
+    //return = "55";
+
     var stressLevel = null;
     
     // real-time data
     // API Level 5.0.0 - not for e.g. descentmk2s
     if (ActivityMonitor.Info has :stressScore) {
-    var activityInfo = ActivityMonitor.getInfo();
+        var activityInfo = ActivityMonitor.getInfo();
 
     if (activityInfo.stressScore != null) {
         stressLevel = activityInfo.stressScore.toDouble();
