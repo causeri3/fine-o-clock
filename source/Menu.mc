@@ -104,13 +104,17 @@ class MenuDelegate extends WatchUi.Menu2InputDelegate {
      }      
   }
 
+//var validKeys as Null or Array<Number> = null;
+
   hidden function cycleFields(setting, item, fieldId, validKeys){
     if (validKeys == null) {                                                 
            validKeys = Settings.fieldsMap.keys();                               
     }     
     var currentIndex = validKeys.indexOf(setting);
     var nextIndex = (currentIndex + 1) % validKeys.size();
-    setting = validKeys[nextIndex]; 
+    // make compiler happy by giving container type
+    var keys = validKeys as Array<Number>;
+    setting = keys[nextIndex]; 
     item.setSubLabel(Settings.getFieldString(setting));
     Application.Properties.setValue(fieldId, setting);
     Settings.getProperties();

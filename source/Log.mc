@@ -29,25 +29,25 @@ module Log {
   
 }}
 
-(:warning)
-module Log {
-    function warning(string) {
-        var timeStr = getTimeString();
-        System.println("| WARNING | " + timeStr + " | " + string);
-    }
-}
+// (:warning)
+// module Log {
+//     function warning(string) {
+//         var timeStr = getTimeString();
+//         System.println("| WARNING | " + timeStr + " | " + string);
+//     }
+// }
 
-(:error)
-module Log {
-  function error(string) {
-  var timeStr = getTimeString();
-    System.println("| ERROR | " + timeStr + " | " + string);
+// (:error)
+// module Log {
+//   function error(string) {
+//   var timeStr = getTimeString();
+//     System.println("| ERROR | " + timeStr + " | " + string);
   
-}}
+// }}
 
 (:release)
 module Log {
   function debug(string) {}
-  function error(string) {}
-  function warning(string) {}
+  // function error(string) {}
+  // function warning(string) {}
 }

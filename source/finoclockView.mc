@@ -9,6 +9,7 @@ class finoclockView extends WatchUi.WatchFace{
     private var sleep;
 
     function initialize() {
+        WatchFace.initialize();
         // Fields.initialize();
         fields = new Fields();
         animation = new BackgroundAnimation();
