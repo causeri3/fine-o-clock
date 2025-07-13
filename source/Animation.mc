@@ -10,7 +10,6 @@ class BackgroundAnimation {
     private var currentImage;
     var isAnimating = false;
     var timerTriggered = false;
-    var sleep = false;
 
     function drawBackground(dc) {
 
