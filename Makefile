@@ -83,3 +83,11 @@ runscreenshotone:
 	pkill -f connectiq; \
 # mac issue with the dock and screenshots
 	@defaults write com.apple.dock orientation -string bottom && killall Dock
+
+get.crashes:
+	$(SDK_HOME)/bin/era -a $(APP_ID) -k $(PRIVATE_KEY)
+
+
+# get iq file for the store
+# ⌘ Shift P - Verify Installation
+# ⌘ Shift P - Export Project
