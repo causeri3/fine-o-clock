@@ -80,7 +80,7 @@ You can also:
 
 
 If you want to test the settings on your comupter you can go in the Simulator either
-* Trigger App Settings & click on teh buttons in teh simulator
+* Trigger App Settings & click on the buttons in the simulator
 or
 * File > Edit Persistent Storage > Edit Application.Properties data
 
