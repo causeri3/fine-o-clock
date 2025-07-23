@@ -69,7 +69,7 @@ class Fields{
         } else {
             dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
         }
-        var fillWidth = (battery / 100.0) * 18;  // Scale battery level to fit
+        var fillWidth = (battery / 100.0) * w_body;  // Scale battery level to fit
         dc.fillRectangle(_x + 1, _y + 1, fillWidth, h_body - 2);
     }
     
