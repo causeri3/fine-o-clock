@@ -9,6 +9,7 @@ module Settings {
     var heartSetting;
     var stressScoreSetting;
     var caloriesGoal;
+    var stepsGoal;
     var animationSetting;
 
 
@@ -22,13 +23,14 @@ function getOrDefault(key, defaultValue, expectedType) {
 // in line: var fieldResource = getFieldResource(fieldId);
 
 function getProperties() {
-    smokeSetting        = getOrDefault("smokeField", 4, Lang.Number);
-    heartSetting        = getOrDefault("heartField", 1, Lang.Number);
-    bubbleSetting       = getOrDefault("bubbleField", 5, Lang.Number);
-    cupSetting          = getOrDefault("cupField", 2, Lang.Number);
-    stressScoreSetting  = getOrDefault("stressThreshold", 50, Lang.Number);
-    caloriesGoal        = getOrDefault("caloriesGoal", 2000, Lang.Number);
-    animationSetting    = getOrDefault("animationSetting", true, Lang.Boolean);
+    smokeSetting = getOrDefault("smokeField", 4, Lang.Number);
+    heartSetting = getOrDefault("heartField", 1, Lang.Number);
+    bubbleSetting = getOrDefault("bubbleField", 5, Lang.Number);
+    cupSetting = getOrDefault("cupField", 2, Lang.Number);
+    stressScoreSetting = getOrDefault("stressThreshold", 50, Lang.Number);
+    caloriesGoal = getOrDefault("caloriesGoal", 2000, Lang.Number);
+    stepsGoal = getOrDefault("stepsGoal", 10000, Lang.Number);
+    animationSetting = getOrDefault("animationSetting", true, Lang.Boolean);
 }
 
 
@@ -43,6 +45,9 @@ function getProperties() {
         6 => Rez.Strings.thisisfine,
         7 => Rez.Strings.body,
         8 => Rez.Strings.caloriesPerc,
+        9 => Rez.Strings.stepsPerc,
+        10 => Rez.Strings.steps,
+        11 => Rez.Strings.minutes,
     };
 
     function getFieldResource(fieldId){
