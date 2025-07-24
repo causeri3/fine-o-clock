@@ -125,6 +125,15 @@ class Fields{
         else if (settingString.equals("Heart Rate")) {
             settingValue = getHeartRate();
         }
+        else if (settingString.equals("Active Minutes")) {
+            settingValue = getActiveMinutes();
+        }
+        else if (settingString.equals("Steps")) {
+            settingValue = getSteps();
+        }
+        else if (settingString.equals("Steps Percentage")) {
+            settingValue = getStepsProgress();
+        }
         else if (settingString.equals("None")) {
             settingValue = "";
         }
