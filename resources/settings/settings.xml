@@ -10,6 +10,9 @@
             <listEntry value="6">@Strings.thisisfine</listEntry>
             <listEntry value="7">@Strings.body</listEntry>
             <listEntry value="8">@Strings.caloriesPerc</listEntry>
+            <listEntry value="9">@Strings.stepsPerc</listEntry>
+            <listEntry value="10">@Strings.steps</listEntry>
+            <listEntry value="11">@Strings.minutes</listEntry>
         </settingConfig>
     </setting>
 
@@ -24,6 +27,9 @@
             <listEntry value="6">@Strings.thisisfine</listEntry>
             <listEntry value="7">@Strings.body</listEntry>
             <listEntry value="8">@Strings.caloriesPerc</listEntry>
+            <listEntry value="9">@Strings.stepsPerc</listEntry>
+            <listEntry value="10">@Strings.steps</listEntry>
+            <listEntry value="11">@Strings.minutes</listEntry>
 
         </settingConfig>
     </setting>
@@ -34,6 +40,7 @@
             <listEntry value="2">@Strings.stress</listEntry>
             <listEntry value="7">@Strings.body</listEntry>
             <listEntry value="8">@Strings.caloriesPerc</listEntry>
+            <listEntry value="9">@Strings.stepsPerc</listEntry>
         </settingConfig>
     </setting>
 
@@ -46,6 +53,10 @@
 
     <setting propertyKey="@Properties.caloriesGoal" title="@Strings.caloriesGoal">
         <settingConfig type="numeric" min="1" max="10000" required="true"/>
+    </setting>
+
+    <setting propertyKey="@Properties.stepsGoal" title="@Strings.caloriesGoal">
+        <settingConfig type="numeric" min="1" max="1000000" required="true"/>
     </setting>
 
     <setting propertyKey="@Properties.stressThreshold" title="@Strings.stressThreshold">
