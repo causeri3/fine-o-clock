@@ -34,6 +34,35 @@ function getHeartRate() as String {
     return "";
 }
 
+function getActiveMinutes() as String {
+
+    var activityInfo = ActivityMonitor.getInfo();
+    var activeMinutes = activityInfo.activeMinutesWeek.total;
+    Log.debug(activeMinutes);
+    if (activeMinutes == null) {return "";}
+    return activeMinutes.format("%i");
+}
+
+
+function getSteps() as String {
+    var activityInfo = ActivityMonitor.getInfo();
+    var steps = activityInfo.steps.format("%i");
+    if (steps == null) {return "";}
+    return steps;
+}
+
+
+function getStepsProgress() as Number{
+    var goal = Settings.stepsGoal;
+    var steps = getSteps();
+
+    if (goal > 0 && steps != null) {
+        var progress = steps.toFloat() / goal.toFloat();
+
+        return (progress > 1.0) ? 100 : (progress * 100).format("%.0f"); // round not only format
+    }
+    return 0; 
+}
 
 function getStressLevel() as String {
 
@@ -102,13 +131,13 @@ function getTime() as String {
 }
 
 
-function getCalories() {
+function getCalories() as String {
     var activityInfo = ActivityMonitor.getInfo();
-    return activityInfo.calories; //.toDouble();
+    return activityInfo.calories.format("%i"); //.toDouble();
 }
 
 
-function getBodyBattery() {
+function getBodyBattery() as String {
     var bodyBattery = null;
     if (Toybox has :SensorHistory && SensorHistory has :getBodyBatteryHistory) {
         var iterator = SensorHistory.getBodyBatteryHistory({ :period => 1 });
@@ -124,14 +153,14 @@ function getBodyBattery() {
 }
 
 
-function getCaloriesProgress() {
+function getCaloriesProgress() as String {
     var goal = Settings.caloriesGoal;
     var calories = getCalories();
 
     if (goal > 0 && calories != null) {
         var progress = calories.toFloat() / goal.toFloat();
 
-        return (progress > 1.0) ? 100 : (progress * 100).format("%.0f"); // round not only format
+        return (progress > 1.0) ? 100.format("%i") : (progress * 100).format("%.0f"); // round not only format
     }
-    return 0; 
+    return 0.format("%i"); 
 }
