@@ -58,6 +58,14 @@ class Menu extends WatchUi.Menu2 {
             {} 
         )
     );
+      Menu2.addItem(
+        new MenuItem(
+            Rez.Strings.caloriesGoal, 
+            Settings.caloriesGoal.toString(),
+            "stepsGoal", 
+            {} 
+        )
+    );
      Menu2.addItem(                                                                                                   
          new MenuItem(                                                                                                
              Rez.Strings.animationSetting,                                                              
@@ -84,7 +92,7 @@ class MenuDelegate extends WatchUi.Menu2InputDelegate {
       cycleFields(Settings.bubbleSetting, item, id, null);
     }
     else if (id.equals("cupField")) {
-      var validKeys = [0, 2, 7, 8]; // only none, stress, body battery, % calories       
+      var validKeys = [0, 2, 7, 8, 9]; // only none, stress, body battery, % calories, % steps      
 
       cycleFields(Settings.cupSetting, item, id, validKeys);
     }
