@@ -60,8 +60,8 @@ class Menu extends WatchUi.Menu2 {
     );
       Menu2.addItem(
         new MenuItem(
-            Rez.Strings.caloriesGoal, 
-            Settings.caloriesGoal.toString(),
+            Rez.Strings.stepsGoal, 
+            Settings.stepsGoal.toString(),
             "stepsGoal", 
             {} 
         )
@@ -106,6 +106,9 @@ class MenuDelegate extends WatchUi.Menu2InputDelegate {
      }
     else if (id.equals("caloriesGoal")) {                                                                      
        cycleNumbers(Settings.caloriesGoal, item, id, 100, 10100);                                                                     
+     }
+      else if (id.equals("stepsGoal")) {                                                                      
+       cycleNumbers(Settings.stepsGoal, item, id, 1000, 101000);                                                                     
      }
     else if (id.equals("animationSetting")) {                                                                        
        toggleAnimation(item);                                                                                         
