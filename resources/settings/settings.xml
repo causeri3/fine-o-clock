@@ -55,7 +55,7 @@
         <settingConfig type="numeric" min="1" max="10000" required="true"/>
     </setting>
 
-    <setting propertyKey="@Properties.stepsGoal" title="@Strings.caloriesGoal">
+    <setting propertyKey="@Properties.stepsGoal" title="@Strings.stepsGoal">
         <settingConfig type="numeric" min="1" max="1000000" required="true"/>
     </setting>
 
