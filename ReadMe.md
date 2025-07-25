@@ -48,6 +48,8 @@ You can also:
 * turn the animation off
 * set the threshold for the stress level animation
 * set your calorie goal
+* set your steps goal
+* turn showing the battery icon off
 
 
 
