@@ -36,9 +36,9 @@ class Menu extends WatchUi.Menu2 {
     );
     Menu2.addItem(
         new MenuItem(
-            Rez.Strings.heartField, 
-            Settings.getFieldString(Settings.heartSetting), 
-            "heartField", 
+            Rez.Strings.bodyField, 
+            Settings.getFieldString(Settings.bodySetting), 
+            "bodyField", 
             {} 
         )
     );
@@ -104,10 +104,9 @@ class MenuDelegate extends WatchUi.Menu2InputDelegate {
 
       cycleFields(Settings.cupSetting, item, id, validKeys);
     }
-    else if (id.equals("heartField")) {
-      var validKeys = [0, 1]; // only none and heart rate         
-
-      cycleFields(Settings.heartSetting, item, id, validKeys);
+    else if (id.equals("bodyField")) {
+      var validKeys = [0, 1, 2, 7, 8, 9, 12]; // only none, heart rate, stress, body battery, % calories, % steps, battery level    
+      cycleFields(Settings.bodySetting, item, id, validKeys);
     }
     else if (id.equals("stressThreshold")) {                                                                      
        cycleNumbers(Settings.stressScoreSetting, item, id, 10, 110);                                                                             

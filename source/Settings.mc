@@ -6,7 +6,7 @@ module Settings {
     var smokeSetting;
     var bubbleSetting;
     var cupSetting;
-    var heartSetting;
+    var bodySetting;
     var stressScoreSetting;
     var caloriesGoal;
     var stepsGoal;
@@ -25,7 +25,7 @@ function getOrDefault(key, defaultValue, expectedType) {
 
 function getProperties() {
     smokeSetting = getOrDefault("smokeField", 4, Lang.Number);
-    heartSetting = getOrDefault("heartField", 1, Lang.Number);
+    bodySetting = getOrDefault("bodyField", 1, Lang.Number);
     bubbleSetting = getOrDefault("bubbleField", 5, Lang.Number);
     cupSetting = getOrDefault("cupField", 2, Lang.Number);
     stressScoreSetting = getOrDefault("stressThreshold", 50, Lang.Number);

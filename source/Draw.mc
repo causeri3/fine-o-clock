@@ -25,17 +25,20 @@ class Fields{
         Settings.getProperties();
     }
 
-    function drawHeart(dc as Dc) as Void {
+    function drawBody(dc as Dc) as Void {
 
-        var heartRate = getHeartRate();
-        var heartSettingString = Settings.getFieldString(Settings.heartSetting);
-        var heartValue = choose_field(heartSettingString);
-        if (heartValue.equals("")) {
+        //var heartRate = getHeartRate();
+        var bodySettingString = Settings.getFieldString(Settings.bodySetting);
+        var bodyValue = choose_field(bodySettingString);
+        if (bodyValue.equals("")) {
         } 
         else {
         dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
+        Log.debug("bodySettingString" + bodySettingString);
+        if (bodySettingString.equals("Heart Rate")){
         dc.drawText(.46*x, .55*y, TIFFontSmall, "♥", Graphics.TEXT_JUSTIFY_RIGHT);
-        dc.drawText(.48*x, .6*y, TIFFontSmall, heartRate, Graphics.TEXT_JUSTIFY_RIGHT);
+        }
+        dc.drawText(.48*x, .6*y, TIFFontSmall, bodyValue, Graphics.TEXT_JUSTIFY_RIGHT);
         }
 
     }
@@ -149,7 +152,7 @@ class Fields{
     function update_fields(dc as Dc) as Void{
         drawBubble(dc);
         drawSmoke(dc);
-        drawHeart(dc);
+        drawBody(dc);
         drawCup(dc);
         if (Settings.batterySetting) { 
             drawBattery(dc);
