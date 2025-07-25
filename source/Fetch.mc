@@ -35,10 +35,8 @@ function getHeartRate() as String {
 }
 
 function getActiveMinutes() as String {
-
     var activityInfo = ActivityMonitor.getInfo();
     var activeMinutes = activityInfo.activeMinutesWeek.total;
-    Log.debug(activeMinutes);
     if (activeMinutes == null) {return "";}
     return activeMinutes.format("%i");
 }
