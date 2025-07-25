@@ -20,7 +20,8 @@
     <string id="caloriesGoal">Calories Goal</string>
     <string id="stepsGoal">Steps Goal</string>
     <string id="stressThreshold">Stress Threshold Animation</string>
-    <string id="animationSetting">Animation</string>                                                                   
+    <string id="animationSetting">Animation</string>     
+    <string id="batterySetting">Show Battery</string>                                                          
     <string id="on">On</string>                                                                                        
     <string id="off">Off</string>  
 </strings>

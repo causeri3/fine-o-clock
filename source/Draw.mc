@@ -78,7 +78,7 @@ class Fields{
         var bubbleValue = choose_field(bubbleSettingString);
         dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
         if (bubbleValue.equals("This is Fine")) {
-            dc.drawText(.55*x, .155*y, TIFFontTiny, bubbleValue, Graphics.TEXT_JUSTIFY_CENTER);
+            dc.drawText(.55*x, .165*y, TIFFontTiny, bubbleValue, Graphics.TEXT_JUSTIFY_CENTER);
         }
         else {
             dc.drawText(.55*x, .125*y, TIFFontLarge, bubbleValue, Graphics.TEXT_JUSTIFY_CENTER);
@@ -148,6 +148,8 @@ class Fields{
         drawSmoke(dc);
         drawHeart(dc);
         drawCup(dc);
-        drawBattery(dc);
+        if (Settings.batterySetting) { 
+            drawBattery(dc);
+        }
     }
 }
