@@ -33,11 +33,14 @@ There are four fields you can change the settings for:
 | This is fine           | ✓    | ✓     |     |                   |
 | Date                   | ✓    | ✓     |     |                   |
 | Time                   | ✓    | ✓     |     |                   |
+| Active Minutes         | ✓    | ✓     |     |                   |
+| Steps               | ✓    | ✓     |     |                   |
 | Calories               | ✓    | ✓     |     |                   |
 | Stress Levels          | ✓    | ✓     | ✓  |                   |
-| % Calorie Goal         | ✓    | ✓     | ✓  |                   |
 | Body Battery           | ✓    | ✓     | ✓  |                   |
-| Heart Rate             | ✓    | ✓     |    | ✓               |
+| % Calorie Goal         | ✓    | ✓     | ✓  |                   |
+| % Steps Goal         | ✓    | ✓     | ✓  |                   |
+| Heart Rate             | ✓    | ✓     |✓   | ✓               |
 | None                   | ✓    | ✓     | ✓  | ✓                |
 
 You can also:
