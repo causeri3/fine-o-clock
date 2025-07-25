@@ -37,6 +37,7 @@
     <setting propertyKey="@Properties.cupField" title="@Strings.cupField">
         <settingConfig type="list">
             <listEntry value="0">@Strings.none</listEntry>
+            <listEntry value="1">@Strings.heart</listEntry>
             <listEntry value="2">@Strings.stress</listEntry>
             <listEntry value="7">@Strings.body</listEntry>
             <listEntry value="8">@Strings.caloriesPerc</listEntry>
