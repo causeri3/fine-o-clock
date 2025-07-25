@@ -11,6 +11,7 @@ module Settings {
     var caloriesGoal;
     var stepsGoal;
     var animationSetting;
+    var batterySetting;
 
 
 function getOrDefault(key, defaultValue, expectedType) {
@@ -31,6 +32,7 @@ function getProperties() {
     caloriesGoal = getOrDefault("caloriesGoal", 2000, Lang.Number);
     stepsGoal = getOrDefault("stepsGoal", 10000, Lang.Number);
     animationSetting = getOrDefault("animationSetting", true, Lang.Boolean);
+    batterySetting = getOrDefault("batterySetting", true, Lang.Boolean);
 }
 
 
