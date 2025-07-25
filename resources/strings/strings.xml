@@ -11,6 +11,7 @@
     <string id="time">Time</string>
     <string id="heart">Heart Rate</string>
     <string id="stress">Stress Level</string>
+    <string id="battery">Battery Level</string>
     <string id="body">Body Battery</string>
     <string id="steps">Steps</string>
     <string id="minutes">Active Minutes This Week</string>

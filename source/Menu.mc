@@ -100,7 +100,7 @@ class MenuDelegate extends WatchUi.Menu2InputDelegate {
       cycleFields(Settings.bubbleSetting, item, id, null);
     }
     else if (id.equals("cupField")) {
-      var validKeys = [0, 1, 2, 7, 8, 9]; // only none, heart rate, stress, body battery, % calories, % steps     
+      var validKeys = [0, 1, 2, 7, 8, 9, 12]; // only none, heart rate, stress, body battery, % calories, % steps, battery level    
 
       cycleFields(Settings.cupSetting, item, id, validKeys);
     }

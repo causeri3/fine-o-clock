@@ -107,6 +107,9 @@ class Fields{
         else if (settingString.equals("Stress Level")) {
             settingValue = getStressLevel();
         }
+        else if (settingString.equals("Battery Level")) {
+            settingValue = getBatteryLevel();
+        }
         else if (settingString.equals("Body Battery")) {
             settingValue = getBodyBattery();
         }

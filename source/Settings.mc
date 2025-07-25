@@ -50,6 +50,7 @@ function getProperties() {
         9 => Rez.Strings.stepsPerc,
         10 => Rez.Strings.steps,
         11 => Rez.Strings.minutes,
+        12 => Rez.Strings.battery,
     };
 
     function getFieldResource(fieldId){

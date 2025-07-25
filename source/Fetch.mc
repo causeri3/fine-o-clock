@@ -64,6 +64,12 @@ function getStepsProgress() as Number{
     return 0; 
 }
 
+function getBatteryLevel() as String {
+    var stats = System.getSystemStats();
+    var battery = stats.battery;
+    return (battery != null) ? battery.format("%i") : "";
+}
+
 function getStressLevel() as String {
     // var value = "55";
     // return value;

@@ -13,6 +13,7 @@
             <listEntry value="9">@Strings.stepsPerc</listEntry>
             <listEntry value="10">@Strings.steps</listEntry>
             <listEntry value="11">@Strings.minutes</listEntry>
+            <listEntry value="12">@Strings.battery</listEntry>
         </settingConfig>
     </setting>
 
@@ -30,6 +31,7 @@
             <listEntry value="9">@Strings.stepsPerc</listEntry>
             <listEntry value="10">@Strings.steps</listEntry>
             <listEntry value="11">@Strings.minutes</listEntry>
+            <listEntry value="12">@Strings.battery</listEntry>
 
         </settingConfig>
     </setting>
@@ -42,6 +44,7 @@
             <listEntry value="7">@Strings.body</listEntry>
             <listEntry value="8">@Strings.caloriesPerc</listEntry>
             <listEntry value="9">@Strings.stepsPerc</listEntry>
+            <listEntry value="12">@Strings.battery</listEntry>
         </settingConfig>
     </setting>
 

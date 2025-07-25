@@ -41,6 +41,7 @@ There are four fields you can change the settings for:
 | Body Battery           | ✓    | ✓     | ✓  |                   |
 | % Calorie Goal         | ✓    | ✓     | ✓  |                   |
 | % Steps Goal         | ✓    | ✓     | ✓  |                   |
+| Battery Level         | ✓    | ✓     | ✓  |                   |
 | Heart Rate             | ✓    | ✓     |✓   | ✓               |
 | None                   | ✓    | ✓     | ✓  | ✓                |
 
