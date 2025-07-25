@@ -65,8 +65,8 @@ function getStepsProgress() as Number{
 }
 
 function getStressLevel() as String {
-
-    //return = "55";
+    // var value = "55";
+    // return value;
 
     var stressLevel = null;
     
