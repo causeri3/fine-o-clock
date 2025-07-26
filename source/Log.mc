@@ -26,28 +26,17 @@ module Log {
   function debug(string) {
     var timeStr = getTimeString();
     System.println("| DEBUG | " + timeStr + " | " + string);
-  
-}}
-
-// (:warning)
-// module Log {
-//     function warning(string) {
-//         var timeStr = getTimeString();
-//         System.println("| WARNING | " + timeStr + " | " + string);
-//     }
-// }
-
-// (:error)
-// module Log {
-//   function error(string) {
-//   var timeStr = getTimeString();
-//     System.println("| ERROR | " + timeStr + " | " + string);
-  
-// }}
+  }
+  function showMemoryUsage() {
+      var stats = System.getSystemStats();
+      debug(" --- System Stats: totalMemory: " + stats.totalMemory);
+      debug("--- System Stats: usedMemory: " + stats.usedMemory);
+      debug("--- System Stats: freeMemory: " + stats.freeMemory);
+  }
+  }
 
 (:release)
 module Log {
   function debug(string) {}
-  // function error(string) {}
-  // function warning(string) {}
+  function showMemoryUsage() {}
 }
