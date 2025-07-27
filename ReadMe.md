@@ -37,11 +37,11 @@ There are four fields you can change the settings for:
 | Active Minutes         | ✓    | ✓     |     |                   |
 | Steps               | ✓    | ✓     |     |                   |
 | Calories               | ✓    | ✓     |     |                   |
-| Stress Levels          | ✓    | ✓     | ✓  |                   |
-| Body Battery           | ✓    | ✓     | ✓  |                   |
-| % Calorie Goal         | ✓    | ✓     | ✓  |                   |
-| % Steps Goal         | ✓    | ✓     | ✓  |                   |
-| Battery Level         | ✓    | ✓     | ✓  |                   |
+| Stress Levels          | ✓    | ✓     | ✓  | ✓                 |
+| Body Battery           | ✓    | ✓     | ✓  | ✓                 |
+| % Calorie Goal         | ✓    | ✓     | ✓  | ✓                 |
+| % Steps Goal         | ✓    | ✓     | ✓  | ✓                |
+| Battery Level         | ✓    | ✓     | ✓  | ✓                 |
 | Heart Rate             | ✓    | ✓     |✓   | ✓               |
 | None                   | ✓    | ✓     | ✓  | ✓                |
 
