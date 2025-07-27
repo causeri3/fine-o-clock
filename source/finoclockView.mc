@@ -80,33 +80,19 @@ class finoclockView extends WatchUi.WatchFace{
     }
 
     hidden function ifAnimationOn(dc) as Void {
-        if(animation.timerTriggered && animation.isAnimating){
-            animation.drawBackground(dc);
-            fields.update_fields(dc);
-            Log.debug("Timer Triggered Update - Animation");
-            animation.timerTriggered = false;
-        }
-        else if((!animation.timerTriggered && !animation.isAnimating) || sleep){
-            basicUpdate(dc);
-        }
-        else{
-            Log.debug("Don't Update - Animation Runs on Timer");
-        }
-
         if (!sleep){
             animation.updateAnimationState();
         }
-        else{
-            Log.debug("Animation is stopped due to sleep");
-        }
+        // I thought I would be smart by only drawing the background if the timer doesnt do it, 
+        // but it led to a black screen for mome milliseconds on the forerunner, fenix and enduro models
+        // appearently they clear the screen no mather what on update
+        basicUpdate(dc);
     }
 
     hidden function basicUpdate(dc) as Void {
         animation.drawBackground(dc);
-        fields.update_fields(dc);
-        Log.debug("Regular Update - No Animation");
-    }
-
+        fields.update_fields(dc);    
+        }
 }
 
 
