@@ -80,4 +80,8 @@
     <settingConfig type="boolean" required="true"/>
   </setting>
 
+    <setting propertyKey="@Properties.basePicFireSetting" title="@Strings.basePicFireSetting">
+    <settingConfig type="boolean" required="true"/>
+  </setting>
+
 </settings>

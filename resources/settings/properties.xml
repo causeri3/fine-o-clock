@@ -8,4 +8,5 @@
   <property id="stepsGoal" type="number">10000</property>
   <property id="animationSetting" type="boolean">true</property>
   <property id="batterySetting" type="boolean">true</property>
+  <property id="basePicFireSetting" type="boolean">false</property>
 </properties>

@@ -12,6 +12,7 @@ module Settings {
     var stepsGoal;
     var animationSetting;
     var batterySetting;
+    var basePicFireSetting;
 
 
 function getOrDefault(key, defaultValue, expectedType) {
@@ -33,6 +34,7 @@ function getProperties() {
     stepsGoal = getOrDefault("stepsGoal", 10000, Lang.Number);
     animationSetting = getOrDefault("animationSetting", true, Lang.Boolean);
     batterySetting = getOrDefault("batterySetting", true, Lang.Boolean);
+    basePicFireSetting = getOrDefault("basePicFireSetting", true, Lang.Boolean);
 }
 
 
