@@ -4,12 +4,12 @@ import Toybox.Math;
 import Toybox.Lang;
 import Toybox.System;
 
+
 class BackgroundAnimation {
     private var imageIndex = 0;
     private var timer;
     private var currentImage;
     var isAnimating = false;
-    var timerTriggered = false;
 
     function drawBackground(dc) {
 
@@ -32,7 +32,7 @@ class BackgroundAnimation {
        if (timer == null) {
            timer = new Timer.Timer();
        }
-        Log.debug("In setAnimationTimer: " + timer.toString());
+        //Log.debug("In setAnimationTimer: " + timer.toString());
     }
 
     function random(min, max) {
@@ -40,17 +40,16 @@ class BackgroundAnimation {
     } 
 
     function restartAnimationTimer() {
-        Log.debug("restartAnimationTimer() is being called.");
+        //Log.debug("restartAnimationTimer() is being called.");
 
         if (timer != null) {
-            //Log.debug("Timer object: " + timer.toString());
             timer.stop();
             // random intervall felt more organic to me
             var random_intervall = random(400, 600);
             //Log.debug("New random_intervall: " + random_intervall);
             timer.start(method(:switchBackground), random_intervall, false); 
         } else {
-            Log.debug("Timer is null in restartAnimationTimer()");
+            //Log.debug("Timer is null in restartAnimationTimer()");
         }
     }
 
@@ -61,7 +60,6 @@ class BackgroundAnimation {
 
         if (stressLevel < Settings.stressScoreSetting) {
             stopAnimation();
-            // free the previous image to save memory
             currentImage = null;
             currentImage = Application.loadResource(Rez.Drawables.stillPic) as BitmapResource;
         } else {
@@ -71,7 +69,7 @@ class BackgroundAnimation {
     }
 
     function startAnimation() {
-        Log.debug("in startAnimation: isAnimating is " + isAnimating.toString());
+        //Log.debug("in startAnimation: isAnimating is " + isAnimating.toString());
 
         if (timer != null && !isAnimating) {
             isAnimating = true;
@@ -80,22 +78,26 @@ class BackgroundAnimation {
     }
 
     function stopAnimation() {
-        Log.debug("in stopAnimation: isAnimating is " + isAnimating.toString());
-        Log.debug("timer is null: " + (timer == null).toString());
+        //Log.debug("in stopAnimation: isAnimating is " + isAnimating.toString());
+        //Log.debug("timer is null: " + (timer == null).toString());
         if (timer != null && isAnimating) {
             isAnimating = false;
             timer.stop();
-            timerTriggered = false;
         }
     }
 
     function switchBackground() as Void {
+        imageIndex = (imageIndex + 1) % 4;
+        // Log.debug("BEFORE NULLING");
+        // Log.showMemoryUsage();
         // free the previous image to save memory
         currentImage = null;
-        imageIndex = (imageIndex + 1) % 4;
+        // Log.debug("AFTER NULLIG");
+        // Log.showMemoryUsage();
         currentImage = loadImage(imageIndex);
+        // Log.debug("AFTER LOADING");
+        // Log.showMemoryUsage();
         restartAnimationTimer();
-        timerTriggered = true;
         WatchUi.requestUpdate(); 
     }
 }
