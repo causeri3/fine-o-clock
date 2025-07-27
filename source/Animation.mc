@@ -27,15 +27,24 @@ class BackgroundAnimation {
         return null;
     }
 
+    function chooseBasePic() as BitmapResource {
+        if (Settings.basePicFireSetting){
+            return Application.loadResource(Rez.Drawables.stillPic) as BitmapResource;
+            }
+        else {
+            return Application.loadResource(Rez.Drawables.stillPicNoFire) as BitmapResource;
+            }
+        }
 
-    function setAnimationTimer() {
+
+    function setAnimationTimer() as Void {
        if (timer == null) {
            timer = new Timer.Timer();
        }
         //Log.debug("In setAnimationTimer: " + timer.toString());
     }
 
-    function random(min, max) {
+    function random(min, max) as Number {
         return min + Math.rand() % (max-min);   
     } 
 
@@ -53,7 +62,7 @@ class BackgroundAnimation {
         }
     }
 
-    function updateAnimationState() {
+    function updateAnimationState() as Void {
         var stressLevel = getStressLevel();
         // == doesnt work with strings in Monkey c - Java like
         stressLevel = stressLevel.equals("") ? 0 as Number : stressLevel.toNumber();
@@ -61,14 +70,28 @@ class BackgroundAnimation {
         if (stressLevel < Settings.stressScoreSetting) {
             stopAnimation();
             currentImage = null;
-            currentImage = Application.loadResource(Rez.Drawables.stillPic) as BitmapResource;
+            currentImage = chooseBasePic();
         } else {
             startAnimation();
         }
 
     }
 
-    function startAnimation() {
+    function setStaticStressPicture() as Void {
+        var stressLevel = getStressLevel();
+        stressLevel = stressLevel.equals("") ? 0 as Number : stressLevel.toNumber();
+        if (stressLevel > Settings.stressScoreSetting) {
+            imageIndex = 1;
+            currentImage = null;
+            currentImage = loadImage(imageIndex);
+            }
+        else {
+            currentImage = null;
+            currentImage = chooseBasePic();
+        }
+    }
+
+    function startAnimation() as Void {
         //Log.debug("in startAnimation: isAnimating is " + isAnimating.toString());
 
         if (timer != null && !isAnimating) {
@@ -77,7 +100,7 @@ class BackgroundAnimation {
             }
     }
 
-    function stopAnimation() {
+    function stopAnimation() as Void {
         //Log.debug("in stopAnimation: isAnimating is " + isAnimating.toString());
         //Log.debug("timer is null: " + (timer == null).toString());
         if (timer != null && isAnimating) {
