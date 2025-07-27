@@ -50,6 +50,7 @@ class finoclockView extends WatchUi.WatchFace{
                 if (animation.isAnimating) {
                     animation.stopAnimation();
                 }
+                animation.setStaticStressPicture();
                 basicUpdate(dc);
             }
     }
