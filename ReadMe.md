@@ -45,6 +45,7 @@ There are four fields you can change the settings for:
 | None                   | ✓    | ✓     | ✓  | ✓                |
 
 You can also:
+* choose your low stress picture
 * turn the animation off
 * set the threshold for the stress level animation
 * set your calorie goal
