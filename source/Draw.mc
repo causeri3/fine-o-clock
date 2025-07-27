@@ -1,25 +1,32 @@
 import Toybox.Graphics;
 import Toybox.WatchUi;
 import Toybox.Lang;
-// import Toybox.System;
-// import Toybox.WatchUi.View;
 
 
 
 class Fields{
-    private var TIFFontSmall = WatchUi.loadResource(Rez.Fonts.TIFFontSmall);
-    private var TIFFontLarge = WatchUi.loadResource(Rez.Fonts.TIFFontLarge);
-    private var TIFFontTiny = WatchUi.loadResource(Rez.Fonts.TIFFontTiny);
-
+    private var TIFFontSmall;
+    private var TIFFontLarge;
+    private var TIFFontTiny;
+    private var x; 
+    private var y; 
 
     //   function initialize() {
     //     WatchFace.initialize();
     // }
 
-    private var x; 
-    private var y; 
-    
+
     function init(dc as Dc){
+        // Log.debug("BEFORE FONT LOADING");
+        // Log.showMemoryUsage();
+
+        TIFFontSmall = WatchUi.loadResource(Rez.Fonts.TIFFontSmall);
+        TIFFontLarge = WatchUi.loadResource(Rez.Fonts.TIFFontLarge);
+        TIFFontTiny = WatchUi.loadResource(Rez.Fonts.TIFFontTiny);
+
+        // Log.debug("AFTER FONT LOADING");
+        // Log.showMemoryUsage();
+
         x = dc.getWidth(); 
         y = dc.getHeight(); 
         Settings.getProperties();
