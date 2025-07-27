@@ -76,9 +76,17 @@ class Menu extends WatchUi.Menu2 {
      ); 
     Menu2.addItem(                                                                                                   
          new MenuItem(                                                                                                
-             Rez.Strings.batterySetting,                                                              
-             Settings.batterySetting ? Rez.Strings.on : Rez.Strings.off,                     
-             "batterySetting",                                                                                      
+          Rez.Strings.batterySetting,                                                              
+          Settings.batterySetting ? Rez.Strings.on : Rez.Strings.off,                     
+          "batterySetting",                                                                                      
+          {}                                                                                                       
+         )                                                                                                            
+     ); 
+    Menu2.addItem(                                                                                                   
+      new MenuItem(                                                                                                
+        Rez.Strings.basePicFireSetting,                                                              
+             Settings.basePicFireSetting ? Rez.Strings.on : Rez.Strings.off,                     
+             "basePicFireSetting",                                                                                      
              {}                                                                                                       
          )                                                                                                            
      ); 
@@ -123,6 +131,11 @@ class MenuDelegate extends WatchUi.Menu2InputDelegate {
     else if (id.equals("batterySetting")) {                                                                        
        toggleBattery(item);                                                                                         
      }    
+    else if (id.equals("basePicFireSetting")) {                                                                        
+       toggleBasePic(item);                                                                                         
+     }    
+
+     
   }
 
 //var validKeys as Null or Array<Number> = null;
@@ -159,6 +172,13 @@ class MenuDelegate extends WatchUi.Menu2InputDelegate {
      Settings.batterySetting = !Settings.batterySetting;                                                                
      item.setSubLabel(Settings.batterySetting ? Rez.Strings.on : Rez.Strings.off);                                     
      Application.Properties.setValue("batterySetting", Settings.batterySetting);                                        
+     Settings.getProperties();
+     }   
+
+    hidden function toggleBasePic(item){                                                                             
+     Settings.basePicFireSetting = !Settings.basePicFireSetting;                                                                
+     item.setSubLabel(Settings.basePicFireSetting ? Rez.Strings.on : Rez.Strings.off);                                     
+     Application.Properties.setValue("basePicFireSetting", Settings.basePicFireSetting);                                        
      Settings.getProperties();
      }   
 }
