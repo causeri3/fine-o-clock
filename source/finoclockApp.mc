@@ -29,12 +29,7 @@ class finoclockApp extends Application.AppBase {
         WatchUi.requestUpdate();
     }
 
-  function getSettingsView() {
-    return [new Menu(), new MenuDelegate()];
-  }
-
-
-function getApp() as finoclockApp {
-    return Application.getApp() as finoclockApp;
-}
+    function getSettingsView() {
+        return [new Menu(), new MenuDelegate()];
+    }
 }
