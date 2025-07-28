@@ -80,7 +80,7 @@ function getStressLevel() as String {
         var activityInfo = ActivityMonitor.getInfo();
 
     if (activityInfo.stressScore != null) {
-        stressLevel = activityInfo.stressScore.toDouble();
+        stressLevel = activityInfo.stressScore;
         Log.debug("Stress from ActivityMonitor: " + stressLevel);
 
         return stressLevel.format("%i");
@@ -89,10 +89,10 @@ function getStressLevel() as String {
     
     // fall back to sensor history - takes around 3 min to update value
     if (stressLevel == null) {
-    stressLevel = getLatestStressLevelFromSensorHistory();
-    Log.debug("Stress from SensorHistory: " + stressLevel);
+        stressLevel = getLatestStressLevelFromSensorHistory();
+        Log.debug("Stress from SensorHistory: " + stressLevel);
 
-    return stressLevel;
+        return stressLevel;
     }
     return "";
 }
@@ -118,12 +118,18 @@ function getLatestStressLevelFromSensorHistory() as String {
     return (sample != null && sample.data != null) ? sample.data.format("%i") : "";
 }
 
+// workaround so the weekday stays English 
+// and I dont have to provide all characters of all possible languages in the Garmin watch Setting
+function numericToStringWeekDay(weekday as Number) as String {
+    var weekDaysString = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+    return weekDaysString[weekday];
+}
 
 function getDate() as String {
-    var now = Gregorian.info(Time.now(), Time.FORMAT_MEDIUM);
+    var now = Gregorian.info(Time.now(), Time.FORMAT_SHORT);
     var dateString = Lang.format(
         "$1$ $2$",
-        [now.day_of_week, now.day]
+        [numericToStringWeekDay(now.day_of_week), now.day]
         );
     return dateString;
 }
@@ -137,8 +143,82 @@ function getTime() as String {
 
 function getCalories() as String {
     var activityInfo = ActivityMonitor.getInfo();
-    return activityInfo.calories.format("%i"); //.toDouble();
+    return activityInfo.calories.format("%i");
 }
+
+
+function getBodyIterator(period as Time.Duration?) {
+    if ((Toybox has :SensorHistory) && (SensorHistory has :getBodyBatteryHistory)) {
+        return SensorHistory.getBodyBatteryHistory({
+            :period => period,
+            :order => SensorHistory.ORDER_NEWEST_FIRST
+        });
+    }
+    return null;
+}
+
+// function getBodyBattery() as String {
+//     var durations = [
+//         new Time.Duration(60 * 30),         // 30 minutes
+//         new Time.Duration(60 * 60),         // 1 hour
+//         new Time.Duration(60 * 60 * 2),     // 2 hours
+//         new Time.Duration(60 * 60 *34)      // 1 day
+//     ];
+
+//     for (var i = 0; i < durations.size(); i++) {
+//         var duration = durations[i];
+//         var bbIterator = getBodyIterator(duration);
+
+//         if (bbIterator == null) {
+//             continue;
+//         }
+
+//         var sample = bbIterator.next();
+//         while (sample != null) {
+//             if (sample.data != null && sample.data.toNumber() != null) {
+//                 return sample.data.toNumber().format("%d");
+//             }
+//             sample = bbIterator.next();
+//         }
+//     }
+
+//     return ""; // fallback if nothing found
+// }
+
+
+
+// // Create a method to get the SensorHistoryIterator object
+// function getBodyIterator() {
+//       // Check device for SensorHistory compatibility
+//       if ((Toybox has :SensorHistory) && (Toybox.SensorHistory has :getBodyBatteryHistory)) {
+//           // Set up the method with parameters
+//           return Toybox.SensorHistory.getBodyBatteryHistory({});
+//       }
+//       return null;
+//   }
+
+// function getBodyBattery() as String {
+//     var bbIterator = getBodyIterator();
+//     var bodyBattery = null;
+//     var sample = null;
+
+//     if (bbIterator == null) {
+//         return "";
+//         }
+//     bodyBattery = bbIterator.next();
+
+//     while (sample == null) {
+//         if (bodyBattery == null) {
+//             return "";
+//             }
+//         sample = bodyBattery.data;
+//         if (sample != null) {
+//             break;
+//             }
+//         bodyBattery = bbIterator.next();
+//         }
+//     return sample.format("%i");
+// }
 
 
 function getBodyBattery() as String {
