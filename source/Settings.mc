@@ -53,6 +53,7 @@ function getProperties() {
         10 => Rez.Strings.steps,
         11 => Rez.Strings.minutes,
         12 => Rez.Strings.battery,
+        13 => Rez.Strings.staycurious,
     };
 
     function getFieldResource(fieldId){
