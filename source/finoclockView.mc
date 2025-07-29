@@ -14,8 +14,7 @@ class finoclockView extends WatchUi.WatchFace{
         fields = new Fields();
         animation = new BackgroundAnimation();
         sleep = false;
-        Log.debug("finoclockView initialized");
-
+        //Log.debug("finoclockView initialized");
     }
 
     // Load your resources here
@@ -29,7 +28,7 @@ class finoclockView extends WatchUi.WatchFace{
     // the state of this View and prepare it to be shown. This includes
     // loading resources into memory.
     function onShow() as Void {
-        Log.debug("In onShow");
+        //Log.debug("In onShow");
         // bugfix, if onShow and in sleep: timer.start() leads to 
         // Error: Permission Required
         // Details: "Symbol 'start' not available to 'Watch Face'"
@@ -42,11 +41,11 @@ class finoclockView extends WatchUi.WatchFace{
 
     function onUpdate(dc as Dc) as Void {
             if (Settings.animationSetting) { 
-                Log.debug("Animation is set on ON");
+                //Log.debug("Animation is set on ON");
                 ifAnimationOn(dc);
             }
             else{
-                Log.debug("Animation is set on OFF");
+                //Log.debug("Animation is set on OFF");
                 if (animation.isAnimating) {
                     animation.stopAnimation();
                 }
@@ -61,7 +60,7 @@ class finoclockView extends WatchUi.WatchFace{
     // In Simulator trigger by:  Settings > Force onHide and Settings > Force onShow
     // or juts by caling the menu Settings > Trigger App Settings (here you can see that nothing is being updated)
     function onHide() as Void {
-        Log.debug("In onHide");
+        //Log.debug("In onHide");
         // needs to be stopped, becuase not triggered by update, but timer
         animation.stopAnimation();
     }
@@ -69,13 +68,13 @@ class finoclockView extends WatchUi.WatchFace{
     // The user has just looked at their watch. Timers and animations may be started here.
     // In Simulator trigger by: Settings > Disply Mode > Always on > Toggle Power Mode (ooff and on)
     function onExitSleep() as Void {
-        Log.debug("onExitSleep");
+        //Log.debug("onExitSleep");
         sleep = false;
     }
 
     // Terminate any active timers and prepare for slow updates.
     function onEnterSleep() as Void {
-        Log.debug("onEnterSleep");
+        //Log.debug("onEnterSleep");
         sleep = true;
         animation.stopAnimation();
     }
