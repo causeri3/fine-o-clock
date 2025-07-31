@@ -41,7 +41,7 @@ class Fields{
         } 
         else {
         dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
-        Log.debug("bodySettingString" + bodySettingString);
+        //Log.debug("bodySettingString" + bodySettingString);
         if (bodySettingString.equals("Heart Rate")){
         dc.drawText(.46*x, .55*y, TIFFontSmall, "♥", Graphics.TEXT_JUSTIFY_RIGHT);
         }
@@ -61,23 +61,22 @@ class Fields{
     function drawBattery(dc as Dc) as Void {
         var stats = System.getSystemStats();
         var battery = stats.battery;
-    
-        dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
-    
-        var _x = .125*x;
-        var _y = .27*y;
-        var w_body = .08*x;
+        dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
+
+        var w_body = .075*x;
         var h_body = .04*y;
         var w_tip = .008*x;
         var h_tip = .025*y;
+        var _x = .435*x - w_body/2 - w_tip/2;
+        var _y = .945*y;
         dc.drawRectangle(_x, _y, w_body, h_body);  // battery body
         dc.drawRectangle(_x + w_body, _y + w_tip, w_tip, h_tip);    // battery tip
     
         // Fill battery level in different color
         if (battery <= 20) {
-            dc.setColor(Graphics.COLOR_RED, Graphics.COLOR_TRANSPARENT);
+            dc.setColor(0xff5555, Graphics.COLOR_TRANSPARENT);
         } else {
-            dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
+            dc.setColor(0x555555, Graphics.COLOR_TRANSPARENT);
         }
         var fillWidth = (battery / 100.0) * w_body;  // Scale battery level to fit
         dc.fillRectangle(_x + 1, _y + 1, fillWidth, h_body - 2);
@@ -87,7 +86,7 @@ class Fields{
         var bubbleSettingString = Settings.getFieldString(Settings.bubbleSetting);
         var bubbleValue = choose_field(bubbleSettingString);
         dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
-        if (bubbleValue.equals("This is Fine")) {
+        if (bubbleValue.equals("This is Fine") || bubbleValue.equals("Stay curious") ) {
             dc.drawText(.55*x, .165*y, TIFFontTiny, bubbleValue, Graphics.TEXT_JUSTIFY_CENTER);
         }
         else {
@@ -99,7 +98,7 @@ class Fields{
         var smokeSettingString = Settings.getFieldString(Settings.smokeSetting);
         var smokeValue = choose_field(smokeSettingString);
         dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
-        if (smokeValue.equals("This is Fine")) {
+        if (smokeValue.equals("This is Fine")|| smokeValue.equals("Stay curious")) {
             dc.drawText(0.55*x, .045*y, TIFFontTiny, smokeValue, Graphics.TEXT_JUSTIFY_CENTER);
         }
         else {
@@ -131,6 +130,9 @@ class Fields{
         }
         else if (settingString.equals("Time")) {
             settingValue = getTime();
+        }
+        else if (settingString.equals("Stay curious")) {
+            settingValue = "Stay curious";
         }
         else if (settingString.equals("This is Fine")) {
             settingValue = "This is Fine";
