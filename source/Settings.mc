@@ -62,7 +62,7 @@ function getProperties() {
     }
 
     function getFieldString(fieldId) as String{
-        Log.debug("getFieldString " + fieldId);
+        //Log.debug("getFieldString " + fieldId);
         var fieldResource = getFieldResource(fieldId);
         var fieldString = WatchUi.loadResource(fieldResource);
         return (fieldString != null) ? fieldString : "";
