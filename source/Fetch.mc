@@ -12,7 +12,7 @@ function getHeartRate() as String {
     var info = Activity.getActivityInfo();
     if (info != null && info.currentHeartRate != null) {
         heartRate = info.currentHeartRate.format("%i");
-        Log.debug("HR from ActivityMonitor: " + heartRate);
+        //Log.debug("HR from ActivityMonitor: " + heartRate);
         return heartRate;
     }
 
@@ -27,7 +27,7 @@ function getHeartRate() as String {
     var sample = hrIterator.next();
     if (sample != null && sample.heartRate != ActivityMonitor.INVALID_HR_SAMPLE) {
         heartRate = sample.heartRate.format("%i");
-        Log.debug("HR from HeartRateHistory: " + heartRate);
+        //Log.debug("HR from HeartRateHistory: " + heartRate);
         return heartRate;
     }
 
@@ -81,7 +81,7 @@ function getStressLevel() as String {
 
     if (activityInfo.stressScore != null) {
         stressLevel = activityInfo.stressScore;
-        Log.debug("Stress from ActivityMonitor: " + stressLevel);
+        //Log.debug("Stress from ActivityMonitor: " + stressLevel);
 
         return stressLevel.format("%i");
         }
@@ -90,7 +90,7 @@ function getStressLevel() as String {
     // fall back to sensor history - takes around 3 min to update value
     if (stressLevel == null) {
         stressLevel = getLatestStressLevelFromSensorHistory();
-        Log.debug("Stress from SensorHistory: " + stressLevel);
+        //Log.debug("Stress from SensorHistory: " + stressLevel);
 
         return stressLevel;
     }
@@ -146,7 +146,7 @@ function getCalories() as String {
     return activityInfo.calories.format("%i");
 }
 
-// still testing
+// //still testing
 // function getBodyIterator(period as Time.Duration?) {
 //     if ((Toybox has :SensorHistory) && (SensorHistory has :getBodyBatteryHistory)) {
 //         return SensorHistory.getBodyBatteryHistory({
@@ -158,14 +158,18 @@ function getCalories() as String {
 // }
 
 // function getBodyBattery() as String {
+// // crashed on descentmk2s between 12h/24h OOM
 //     var durations = [
 //         new Time.Duration(60 * 30),         // 30 minutes
 //         new Time.Duration(60 * 60),         // 1 hour
-//         new Time.Duration(60 * 60 * 2),     // 2 hours
-//         new Time.Duration(60 * 60 *34)      // 1 day
+//         new Time.Duration(60 * 60 * 6),     // 6 hours
+//         // it seems to me as after 6h the old body battery value lost its meaning completely
+//         //new Time.Duration(60 * 60 * 12)      // 12 hours
 //     ];
 
 //     for (var i = 0; i < durations.size(); i++) {
+//         Log.debug("Duration Minutes: " + (durations[i].value() /60));
+//         //if (i > 0) {Log.debug("Duration Minutes: " + (durations[i].value() /60));}
 //         var duration = durations[i];
 //         var bbIterator = getBodyIterator(duration);
 
@@ -182,7 +186,7 @@ function getCalories() as String {
 //         }
 //     }
 
-//     return ""; // fallback if nothing found
+//     return ""; 
 // }
 
 
