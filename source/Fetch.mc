@@ -146,65 +146,47 @@ function getCalories() as String {
     return activityInfo.calories.format("%i");
 }
 
-// //still testing
-// function getBodyIterator(period as Time.Duration?) {
-//     if ((Toybox has :SensorHistory) && (SensorHistory has :getBodyBatteryHistory)) {
-//         return SensorHistory.getBodyBatteryHistory({
-//             :period => period,
-//             :order => SensorHistory.ORDER_NEWEST_FIRST
-//         });
-//     }
-//     return null;
-// }
-
-// function getBodyBattery() as String {
-// // crashed on descentmk2s between 12h/24h OOM
-//     var durations = [
-//         new Time.Duration(60 * 30),         // 30 minutes
-//         new Time.Duration(60 * 60),         // 1 hour
-//         new Time.Duration(60 * 60 * 6),     // 6 hours
-//         // it seems to me as after 6h the old body battery value lost its meaning completely
-//         //new Time.Duration(60 * 60 * 12)      // 12 hours
-//     ];
-
-//     for (var i = 0; i < durations.size(); i++) {
-//         Log.debug("Duration Minutes: " + (durations[i].value() /60));
-//         //if (i > 0) {Log.debug("Duration Minutes: " + (durations[i].value() /60));}
-//         var duration = durations[i];
-//         var bbIterator = getBodyIterator(duration);
-
-//         if (bbIterator == null) {
-//             continue;
-//         }
-
-//         var sample = bbIterator.next();
-//         while (sample != null) {
-//             if (sample.data != null && sample.data.toNumber() != null) {
-//                 return sample.data.toNumber().format("%d");
-//             }
-//             sample = bbIterator.next();
-//         }
-//     }
-
-//     return ""; 
-// }
-
-
+function getBodyIterator(period as Time.Duration?) {
+    if ((Toybox has :SensorHistory) && (SensorHistory has :getBodyBatteryHistory)) {
+        return SensorHistory.getBodyBatteryHistory({
+            :period => period,
+            :order => SensorHistory.ORDER_NEWEST_FIRST
+        });
+    }
+    return null;
+}
 
 function getBodyBattery() as String {
-    var bodyBattery = null;
-    if (Toybox has :SensorHistory && SensorHistory has :getBodyBatteryHistory) {
-        var iterator = SensorHistory.getBodyBatteryHistory({ :period => 1 });
-        if (iterator != null) {
-            bodyBattery = iterator.next();    
+    // crashed on descentmk2s between 12h/24h OOM
+    var durations = [
+        new Time.Duration(60 * 30),         // 30 minutes
+        new Time.Duration(60 * 60),         // 1 hour
+        new Time.Duration(60 * 60 * 6),     // 6 hours
+        // it seems to me as after 6h the old body battery value lost its meaning completely
+    ];
+
+    for (var i = 0; i < durations.size(); i++) {
+        //Log.debug("Duration Minutes: " + (durations[i].value() /60));
+        //if (i > 0) {Log.debug("Duration Minutes: " + (durations[i].value() /60));}
+        var duration = durations[i];
+        var bbIterator = getBodyIterator(duration);
+
+        if (bbIterator == null) {
+            continue;
+        }
+
+        var sample = bbIterator.next();
+        while (sample != null) {
+            if (sample.data != null && sample.data.toNumber() != null) {
+                return sample.data.toNumber().format("%d");
+            }
+            sample = bbIterator.next();
         }
     }
-    if (bodyBattery != null) {
-        bodyBattery = bodyBattery.data.format("%i");
-        return bodyBattery;
-    }
-    return "";
+
+    return ""; 
 }
+
 
 
 function getCaloriesProgress() as String {
