@@ -42,6 +42,14 @@ class Menu extends WatchUi.Menu2 {
             {} 
         )
     );
+     Menu2.addItem(
+        new MenuItem(
+            Rez.Strings.batteryField, 
+            Settings.getFieldString(Settings.batterySetting), 
+            "batteryField", 
+            {} 
+        )
+    );
     Menu2.addItem(
         new MenuItem(
             Rez.Strings.stressThreshold, 
@@ -72,14 +80,6 @@ class Menu extends WatchUi.Menu2 {
              Settings.animationSetting ? Rez.Strings.on : Rez.Strings.off,                     
              "animationSetting",                                                                                      
              {}                                                                                                       
-         )                                                                                                            
-     ); 
-    Menu2.addItem(                                                                                                   
-         new MenuItem(                                                                                                
-          Rez.Strings.batterySetting,                                                              
-          Settings.batterySetting ? Rez.Strings.on : Rez.Strings.off,                     
-          "batterySetting",                                                                                      
-          {}                                                                                                       
          )                                                                                                            
      ); 
     Menu2.addItem(                                                                                                   
@@ -116,6 +116,10 @@ class MenuDelegate extends WatchUi.Menu2InputDelegate {
       var validKeys = [0, 1, 2, 7, 8, 9, 12]; // only none, heart rate, stress, body battery, % calories, % steps, battery level    
       cycleFields(Settings.bodySetting, item, id, validKeys);
     }
+    else if (id.equals("batteryField")) {
+      var validKeys = [0, 7, 8, 9, 12]; // only none, body battery, % calories, % steps, battery level    
+      cycleFields(Settings.batterySetting, item, id, validKeys);
+    }
     else if (id.equals("stressThreshold")) {                                                                      
        cycleNumbers(Settings.stressScoreSetting, item, id, 10, 110);                                                                             
      }
@@ -128,9 +132,6 @@ class MenuDelegate extends WatchUi.Menu2InputDelegate {
     else if (id.equals("animationSetting")) {                                                                        
        toggleAnimation(item);                                                                                         
      }      
-    else if (id.equals("batterySetting")) {                                                                        
-       toggleBattery(item);                                                                                         
-     }    
     else if (id.equals("basePicFireSetting")) {                                                                        
        toggleBasePic(item);                                                                                         
      }    
@@ -167,13 +168,7 @@ class MenuDelegate extends WatchUi.Menu2InputDelegate {
      item.setSubLabel(Settings.animationSetting ? Rez.Strings.on : Rez.Strings.off);                                     
      Application.Properties.setValue("animationSetting", Settings.animationSetting);                                        
      Settings.getProperties();
-     }   
-  hidden function toggleBattery(item){                                                                             
-     Settings.batterySetting = !Settings.batterySetting;                                                                
-     item.setSubLabel(Settings.batterySetting ? Rez.Strings.on : Rez.Strings.off);                                     
-     Application.Properties.setValue("batterySetting", Settings.batterySetting);                                        
-     Settings.getProperties();
-     }   
+     }    
 
     hidden function toggleBasePic(item){                                                                             
      Settings.basePicFireSetting = !Settings.basePicFireSetting;                                                                
