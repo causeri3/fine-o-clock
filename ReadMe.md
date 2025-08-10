@@ -23,19 +23,19 @@
 
 There are four fields you can change the settings for:
 
-|               | Smoke | Bubble | Cup | Body |
-|------------------------|-----|------|---|-----------------|
+|               | Smoke | Bubble | Cup | Body | Battery Icon |
+|------------------------|-----|------|---|-----------------|---|
 | This is fine           | ✓    | ✓     |     |                   |
 | Date                   | ✓    | ✓     |     |                   |
 | Time                   | ✓    | ✓     |     |                   |
 | Active Minutes         | ✓    | ✓     |     |                   |
 | Steps               | ✓    | ✓     |     |                   |
 | Calories               | ✓    | ✓     |     |                   |
-| Stress Levels          | ✓    | ✓     | ✓  | ✓                 |
-| Body Battery           | ✓    | ✓     | ✓  | ✓                 |
-| % Calorie Goal         | ✓    | ✓     | ✓  | ✓                 |
-| % Steps Goal         | ✓    | ✓     | ✓  | ✓                |
-| Battery Level         | ✓    | ✓     | ✓  | ✓                 |
+| Stress Levels          | ✓    | ✓     | ✓  | ✓                 |   |
+| Body Battery           | ✓    | ✓     | ✓  | ✓                 | ✓  |
+| % Calorie Goal         | ✓    | ✓     | ✓  | ✓                 | ✓  |
+| % Steps Goal         | ✓    | ✓     | ✓  | ✓                | ✓  |
+| Battery Level         | ✓    | ✓     | ✓  | ✓                 | ✓  |
 | Heart Rate             | ✓    | ✓     |✓   | ✓               |
 | None                   | ✓    | ✓     | ✓  | ✓                |
 
