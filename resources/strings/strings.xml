@@ -5,6 +5,7 @@
     <string id="bubbleField">Bubble Field</string>
     <string id="cupField">Cup Field</string>
     <string id="bodyField">Body Field</string>
+    <string id="batteryField">Battery Field</string>
     <string id="stressThreshold">Stress Threshold</string>
     <string id="date">Date</string>
     <string id="calories">Calories</string>
@@ -23,7 +24,6 @@
     <string id="stepsGoal">Steps Goal</string>
     <string id="stressThreshold">Stress Threshold</string>
     <string id="animationSetting">Animation</string>     
-    <string id="batterySetting">Show Battery</string>   
     <string id="basePicFireSetting">Low-Stress Picture with Fire</string>                                 
     <string id="on">On</string>                                                                                        
     <string id="off">Off</string>  

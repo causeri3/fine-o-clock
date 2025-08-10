@@ -46,6 +46,7 @@
             <listEntry value="7">@Strings.body</listEntry>
             <listEntry value="8">@Strings.caloriesPerc</listEntry>
             <listEntry value="9">@Strings.stepsPerc</listEntry>
+            <listEntry value="12">@Strings.battery</listEntry>
         </settingConfig>
     </setting>
 
@@ -54,6 +55,16 @@
             <listEntry value="0">@Strings.none</listEntry>
             <listEntry value="1">@Strings.heart</listEntry>
             <listEntry value="2">@Strings.stress</listEntry>
+            <listEntry value="7">@Strings.body</listEntry>
+            <listEntry value="8">@Strings.caloriesPerc</listEntry>
+            <listEntry value="9">@Strings.stepsPerc</listEntry>
+            <listEntry value="12">@Strings.battery</listEntry>
+        </settingConfig>
+    </setting>
+
+    <setting propertyKey="@Properties.batteryField" title="@Strings.batteryField">
+        <settingConfig type="list">
+            <listEntry value="0">@Strings.none</listEntry>
             <listEntry value="7">@Strings.body</listEntry>
             <listEntry value="8">@Strings.caloriesPerc</listEntry>
             <listEntry value="9">@Strings.stepsPerc</listEntry>
@@ -76,11 +87,6 @@
     <setting propertyKey="@Properties.animationSetting" title="@Strings.animationSetting">
     <settingConfig type="boolean" required="true"/>
   </setting>
-
-    <setting propertyKey="@Properties.batterySetting" title="@Strings.batterySetting">
-    <settingConfig type="boolean" required="true"/>
-  </setting>
-
     <setting propertyKey="@Properties.basePicFireSetting" title="@Strings.basePicFireSetting">
     <settingConfig type="boolean" required="true"/>
   </setting>

@@ -29,11 +29,11 @@ function getProperties() {
     bodySetting = getOrDefault("bodyField", 1, Lang.Number);
     bubbleSetting = getOrDefault("bubbleField", 5, Lang.Number);
     cupSetting = getOrDefault("cupField", 2, Lang.Number);
+    batterySetting = getOrDefault("batteryField", 12,  Lang.Number);
     stressScoreSetting = getOrDefault("stressThreshold", 50, Lang.Number);
     caloriesGoal = getOrDefault("caloriesGoal", 2000, Lang.Number);
     stepsGoal = getOrDefault("stepsGoal", 10000, Lang.Number);
     animationSetting = getOrDefault("animationSetting", true, Lang.Boolean);
-    batterySetting = getOrDefault("batterySetting", true, Lang.Boolean);
     basePicFireSetting = getOrDefault("basePicFireSetting", true, Lang.Boolean);
 }
 
