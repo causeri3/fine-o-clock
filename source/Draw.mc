@@ -37,30 +37,32 @@ class Fields{
         //var heartRate = getHeartRate();
         var bodySettingString = Settings.getFieldString(Settings.bodySetting);
         var bodyValue = choose_field(bodySettingString);
-        if (bodyValue.equals("")) {
-        } 
-        else {
+        bodyValue = reformatToString(bodyValue);
         dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
         //Log.debug("bodySettingString" + bodySettingString);
         if (bodySettingString.equals("Heart Rate")){
         dc.drawText(.46*x, .55*y, TIFFontSmall, "♥", Graphics.TEXT_JUSTIFY_RIGHT);
         }
         dc.drawText(.48*x, .6*y, TIFFontSmall, bodyValue, Graphics.TEXT_JUSTIFY_RIGHT);
-        }
-
     }
 
     function drawCup(dc as Dc) as Void {
         var cupSettingString = Settings.getFieldString(Settings.cupSetting);
         var cupValue = choose_field(cupSettingString);
+        cupValue = reformatToString(cupValue);
         dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
         dc.drawText(.76*x, .58*y, TIFFontSmall, cupValue, Graphics.TEXT_JUSTIFY_CENTER);
     }
 
 
     function drawBattery(dc as Dc) as Void {
-        var stats = System.getSystemStats();
-        var battery = stats.battery;
+        var batterySettingString = Settings.getFieldString(Settings.batterySetting);
+        if (batterySettingString.equals("None")) {return;}
+        var batteryValue = choose_field(batterySettingString);
+        if (batteryValue == null) {return;}
+        
+        // var stats = System.getSystemStats();
+        // var battery = stats.battery;
         dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
 
         var w_body = .075*x;
@@ -73,18 +75,22 @@ class Fields{
         dc.drawRectangle(_x + w_body, _y + w_tip, w_tip, h_tip);    // battery tip
     
         // Fill battery level in different color
-        if (battery <= 20) {
+        if ((batterySettingString.equals("Battery Level") || batterySettingString.equals("Body Battery")) 
+            && batteryValue <= 20 ) {
             dc.setColor(0xff5555, Graphics.COLOR_TRANSPARENT);
         } else {
             dc.setColor(0x555555, Graphics.COLOR_TRANSPARENT);
         }
-        var fillWidth = (battery / 100.0) * w_body;  // Scale battery level to fit
+        var fillWidth = (batteryValue / 100.0) * w_body;  // Scale battery level to fit
         dc.fillRectangle(_x + 1, _y + 1, fillWidth, h_body - 2);
     }
+
+    
     
     function drawBubble(dc as Dc) {
         var bubbleSettingString = Settings.getFieldString(Settings.bubbleSetting);
         var bubbleValue = choose_field(bubbleSettingString);
+        bubbleValue = reformatToString(bubbleValue);
         dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
         if (bubbleValue.equals("This is Fine") || bubbleValue.equals("Stay curious") ) {
             dc.drawText(.55*x, .165*y, TIFFontTiny, bubbleValue, Graphics.TEXT_JUSTIFY_CENTER);
@@ -97,6 +103,7 @@ class Fields{
     function drawSmoke(dc as Dc) as Void {
         var smokeSettingString = Settings.getFieldString(Settings.smokeSetting);
         var smokeValue = choose_field(smokeSettingString);
+        smokeValue = reformatToString(smokeValue);
         dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
         if (smokeValue.equals("This is Fine")|| smokeValue.equals("Stay curious")) {
             dc.drawText(0.55*x, .045*y, TIFFontTiny, smokeValue, Graphics.TEXT_JUSTIFY_CENTER);
@@ -107,11 +114,11 @@ class Fields{
 
     }
 
-    function choose_field(settingString) as String{
+    function choose_field(settingString) {
         var settingValue;
         
         if (settingString.equals("Calories")) {
-            settingValue = getCalories().toString();
+            settingValue = getCalories();
         } 
         else if (settingString.equals("Stress Level")) {
             settingValue = getStressLevel();
@@ -163,8 +170,6 @@ class Fields{
         drawSmoke(dc);
         drawBody(dc);
         drawCup(dc);
-        if (Settings.batterySetting) { 
-            drawBattery(dc);
-        }
+        drawBattery(dc);
     }
 }
