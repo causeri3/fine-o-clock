@@ -64,8 +64,7 @@ class BackgroundAnimation {
 
     function updateAnimationState() as Void {
         var stressLevel = getStressLevel();
-        // == doesnt work with strings in Monkey c - Java like
-        stressLevel = stressLevel.equals("") ? 0 as Number : stressLevel.toNumber();
+        stressLevel = stressLevel == null ? 0 : stressLevel;
 
         if (stressLevel < Settings.stressScoreSetting) {
             stopAnimation();
@@ -79,7 +78,7 @@ class BackgroundAnimation {
 
     function setStaticStressPicture() as Void {
         var stressLevel = getStressLevel();
-        stressLevel = stressLevel.equals("") ? 0 as Number : stressLevel.toNumber();
+        stressLevel = stressLevel == null ? 0 : stressLevel;
         if (stressLevel > Settings.stressScoreSetting) {
             imageIndex = 1;
             currentImage = null;
