@@ -6,12 +6,12 @@ import Toybox.Time;
 import Toybox.SensorHistory;
 
 
-function getHeartRate() as String {
+function getHeartRate() as Number or Null{
     var heartRate = null;
     // real-time data
     var info = Activity.getActivityInfo();
     if (info != null && info.currentHeartRate != null) {
-        heartRate = info.currentHeartRate.format("%i");
+        heartRate = info.currentHeartRate;
         //Log.debug("HR from ActivityMonitor: " + heartRate);
         return heartRate;
     }
@@ -20,55 +20,49 @@ function getHeartRate() as String {
     // get last sample, working with Time.Duration led to crashes, stopped digging deeper
     // var hrIterator = ActivityMonitor.getHeartRateHistory(Time.Duration(6, true);
     var hrIterator = ActivityMonitor.getHeartRateHistory(1, true);
-    // Not sure if it is needed - just more safety
-    if (hrIterator == null) {
-        return "";
-        }
     var sample = hrIterator.next();
     if (sample != null && sample.heartRate != ActivityMonitor.INVALID_HR_SAMPLE) {
-        heartRate = sample.heartRate.format("%i");
+        heartRate = sample.heartRate;
         //Log.debug("HR from HeartRateHistory: " + heartRate);
         return heartRate;
     }
 
-    return "";
+    return heartRate;
 }
 
-function getActiveMinutes() as String {
+function getActiveMinutes() as Number or Null{
     var activityInfo = ActivityMonitor.getInfo();
-    var activeMinutes = activityInfo.activeMinutesWeek.total;
-    if (activeMinutes == null) {return "";}
-    return activeMinutes.format("%i");
+    var activeMinutes = activityInfo.activeMinutesWeek;
+    return (activeMinutes != null) ? activeMinutes.total : null;
 }
 
 
-function getSteps() as String {
+function getSteps() as Number or Null{
     var activityInfo = ActivityMonitor.getInfo();
-    var steps = activityInfo.steps.format("%i");
-    if (steps == null) {return "";}
+    var steps = activityInfo.steps;
     return steps;
 }
 
 
-function getStepsProgress() as Number{
+function getStepsProgress() as Number or Null {
     var goal = Settings.stepsGoal;
     var steps = getSteps();
 
     if (goal > 0 && steps != null) {
         var progress = steps.toFloat() / goal.toFloat();
 
-        return (progress > 1.0) ? 100 : (progress * 100).format("%.0f"); // round not only format
+        return (progress > 1.0) ? 100 : (progress * 100);
     }
     return 0; 
 }
 
-function getBatteryLevel() as String {
+function getBatteryLevel() as Float {
     var stats = System.getSystemStats();
     var battery = stats.battery;
-    return (battery != null) ? battery.format("%i") : "";
+    return battery;
 }
 
-function getStressLevel() as String {
+function getStressLevel() as Number or Null {
     // var value = "55";
     // return value;
 
@@ -83,7 +77,7 @@ function getStressLevel() as String {
         stressLevel = activityInfo.stressScore;
         //Log.debug("Stress from ActivityMonitor: " + stressLevel);
 
-        return stressLevel.format("%i");
+        return stressLevel;
         }
     }
     
@@ -94,7 +88,6 @@ function getStressLevel() as String {
 
         return stressLevel;
     }
-    return "";
 }
 
 function getStressIterator() {
@@ -108,14 +101,14 @@ function getStressIterator() {
 }
     
 
-function getLatestStressLevelFromSensorHistory() as String {
+function getLatestStressLevelFromSensorHistory() as Number or Null {
     // takes mostly plus minus 3 minutes to get a new stress value
     var stressIterator = getStressIterator();
     if (stressIterator == null) {
-        return "";
+        return null;
     }
     var sample = stressIterator.next();  
-    return (sample != null && sample.data != null) ? sample.data.format("%i") : "";
+    return (sample != null && sample.data != null) ? sample.data : null;
 }
 
 // workaround so the weekday stays English 
@@ -141,9 +134,27 @@ function getTime() as String {
 }
 
 
-function getCalories() as String {
+// function getTime() as String {
+//     var clockTime = System.getClockTime();
+//     var settings = System.getDeviceSettings();
+
+//     if (settings.is24Hour) {
+//         return Lang.format("$1$:$2$", [clockTime.hour, clockTime.min.format("%02d")]);
+//     } else {
+//         var hour12 = clockTime.hour % 12;
+//         if (hour12 == 0) {
+//             hour12 = 12;
+//         }
+//         return Lang.format("$1$:$2$", [hour12, clockTime.min.format("%02d")]);
+//     }
+// }
+
+
+
+
+function getCalories() as Number or Null {
     var activityInfo = ActivityMonitor.getInfo();
-    return activityInfo.calories.format("%i");
+    return activityInfo.calories;
 }
 
 function getBodyIterator(period as Time.Duration?) {
@@ -156,7 +167,7 @@ function getBodyIterator(period as Time.Duration?) {
     return null;
 }
 
-function getBodyBattery() as String {
+function getBodyBattery() as Number or Null {
     // crashed on descentmk2s between 12h/24h OOM
     var durations = [
         new Time.Duration(60 * 30),         // 30 minutes
@@ -178,25 +189,33 @@ function getBodyBattery() as String {
         var sample = bbIterator.next();
         while (sample != null) {
             if (sample.data != null && sample.data.toNumber() != null) {
-                return sample.data.toNumber().format("%d");
+                return sample.data.toNumber();
             }
             sample = bbIterator.next();
         }
     }
 
-    return ""; 
+    return null; 
 }
 
-
-
-function getCaloriesProgress() as String {
+function getCaloriesProgress() as Number or Null {
     var goal = Settings.caloriesGoal;
     var calories = getCalories();
 
     if (goal > 0 && calories != null) {
         var progress = calories.toFloat() / goal.toFloat();
 
-        return (progress > 1.0) ? 100.format("%i") : (progress * 100).format("%.0f"); // round not only format
+        return (progress > 1.0) ? 100 : (progress * 100); 
     }
-    return 0.format("%i"); 
+    return 0; 
+}
+
+function reformatToString(value) as String {
+    if (value instanceof Lang.String) {
+        return value; 
+        }
+    if (value == null) {
+        return "";
+    }
+    return value.format("%.0f"); // round not only format
 }
