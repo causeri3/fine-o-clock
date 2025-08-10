@@ -56,11 +56,13 @@ function getStepsProgress() as Number or Null {
     return 0; 
 }
 
+
 function getBatteryLevel() as Float {
     var stats = System.getSystemStats();
     var battery = stats.battery;
     return battery;
 }
+
 
 function getStressLevel() as Number or Null {
     // var value = "55";
@@ -90,6 +92,7 @@ function getStressLevel() as Number or Null {
     }
 }
 
+
 function getStressIterator() {
     // Check device for SensorHistory compatibility
     if ((Toybox has :SensorHistory) && (SensorHistory has :getStressHistory)) {
@@ -111,12 +114,14 @@ function getLatestStressLevelFromSensorHistory() as Number or Null {
     return (sample != null && sample.data != null) ? sample.data : null;
 }
 
+
 // workaround so the weekday stays English 
 // and I dont have to provide all characters of all possible languages in the Garmin watch Setting
 function numericToStringWeekDay(weekday as Number) as String {
     var weekDaysString = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
     return weekDaysString[weekday-1];
 }
+
 
 function getDate() as String {
     var now = Gregorian.info(Time.now(), Time.FORMAT_SHORT);
@@ -127,35 +132,28 @@ function getDate() as String {
     return dateString;
 }
 
+
 function getTime() as String {
     var clockTime = System.getClockTime();
-    var timeString = Lang.format("$1$:$2$", [clockTime.hour, clockTime.min.format("%02d")]);
-    return timeString;
+    var settings = System.getDeviceSettings();
+
+    if (settings.is24Hour) {
+        return Lang.format("$1$:$2$", [clockTime.hour, clockTime.min.format("%02d")]);
+    } else {
+        var hour12 = clockTime.hour % 12;
+        if (hour12 == 0) {
+            hour12 = 12;
+        }
+        return Lang.format("$1$:$2$", [hour12, clockTime.min.format("%02d")]);
+    }
 }
-
-
-// function getTime() as String {
-//     var clockTime = System.getClockTime();
-//     var settings = System.getDeviceSettings();
-
-//     if (settings.is24Hour) {
-//         return Lang.format("$1$:$2$", [clockTime.hour, clockTime.min.format("%02d")]);
-//     } else {
-//         var hour12 = clockTime.hour % 12;
-//         if (hour12 == 0) {
-//             hour12 = 12;
-//         }
-//         return Lang.format("$1$:$2$", [hour12, clockTime.min.format("%02d")]);
-//     }
-// }
-
-
 
 
 function getCalories() as Number or Null {
     var activityInfo = ActivityMonitor.getInfo();
     return activityInfo.calories;
 }
+
 
 function getBodyIterator(period as Time.Duration?) {
     if ((Toybox has :SensorHistory) && (SensorHistory has :getBodyBatteryHistory)) {
@@ -166,6 +164,7 @@ function getBodyIterator(period as Time.Duration?) {
     }
     return null;
 }
+
 
 function getBodyBattery() as Number or Null {
     // crashed on descentmk2s between 12h/24h OOM
@@ -198,6 +197,7 @@ function getBodyBattery() as Number or Null {
     return null; 
 }
 
+
 function getCaloriesProgress() as Number or Null {
     var goal = Settings.caloriesGoal;
     var calories = getCalories();
@@ -209,6 +209,7 @@ function getCaloriesProgress() as Number or Null {
     }
     return 0; 
 }
+
 
 function reformatToString(value) as String {
     if (value instanceof Lang.String) {
