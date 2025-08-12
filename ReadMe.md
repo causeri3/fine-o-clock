@@ -100,4 +100,4 @@ This beautifully build and structured repository helped me greatly to understand
 ---
 
 #### License
-This project is licensed under AGPL v3+
+This project is licensed under GPLv3+
