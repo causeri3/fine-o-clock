@@ -34,9 +34,3 @@ module Log {
       debug("--- System Stats: freeMemory: " + stats.freeMemory);
   }
   }
-
-(:release)
-module Log {
-  function debug(string) {}
-  function showMemoryUsage() {}
-}

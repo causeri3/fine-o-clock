@@ -14,19 +14,16 @@ define build_device
 endef
 
 # make sure they are not read as files (in case file with that name exists in the directory)
-.PHONY: build build.release buildall run run.settings clean buildrunscreenshotall runscreenshotall
+.PHONY: build buildall run run.settings clean buildrunscreenshotall runscreenshotall
 
 build:
 	$(call build_device,$(DEVICE),--debug)
-
-build.release:
-	$(call build_device,$(DEVICE),--release)
 
 buildall:
 	@for device in $(devices); do \
 		echo "-----"; \
 		echo "Building for" $$device; \
-		$(call build_device,$$device,--release); \
+		$(call build_device,$$device,--debug); \
 	done
 
 
