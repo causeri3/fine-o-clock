@@ -72,10 +72,6 @@ You can also:
    ```sh
    make run.settings
    ```
-* Build for device
-   ```sh
-   make build.release
-   ```
 * Deploy on device
     1. Enable *Developer Mode* on your Garmin watch. 
     2. Copy the compiled `.prg` file from the `bin` into the `/GARMIN/APPS/` directory on your watch. (For Mac I used [Android File Transfer](https://android.p2hp.com/filetransfer/index.html))
