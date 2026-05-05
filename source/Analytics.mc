@@ -8,9 +8,20 @@ import Toybox.Time;
 (:background)
 class Analytics {
     const QUEUE_KEY = "eventQueue";
+    const LATEST_SETTINGS_KEY = "latestSettings";
     const MAX_QUEUE = 5;
 
     function initialize() {
+    }
+
+    function trackSettings(data as String) as Void {
+        var event = {
+            "event"     => "settings",
+            "device_id" => Storage.getValue("deviceId"),
+            "part_no"   => Storage.getValue("partNumber"),
+            "ts"        => Time.now().value(),
+            "data"      => data};
+        Storage.setValue(LATEST_SETTINGS_KEY, event);
     }
 
     function track(eventType as String, data as String or Dictionary or Null) as Void  {

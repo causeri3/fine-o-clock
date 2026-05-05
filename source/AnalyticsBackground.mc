@@ -8,6 +8,7 @@ import Toybox.Time;
 (:background)
 class AnalyticsBackground extends System.ServiceDelegate {
     var QUEUE_KEY = "eventQueue";
+    var LATEST_SETTINGS_KEY = "latestSettings";
     var ENDPOINT = "https://tvsvdqiqfjywgzeozwxf.supabase.co/functions/v1/finoclock";
 
     function initialize() {
@@ -17,7 +18,10 @@ class AnalyticsBackground extends System.ServiceDelegate {
     function onTemporalEvent() as Void {
         _trackDailyActiveIfNeeded();
         var queue = Storage.getValue(QUEUE_KEY) as Array or Null;
-        if (queue == null || queue.size() == 0) {
+        if (queue == null) { queue = []; }
+        var latestSettings = Storage.getValue(LATEST_SETTINGS_KEY);
+        if (latestSettings != null) { queue.add(latestSettings); }
+        if (queue.size() == 0) {
             Background.exit(null);
             return;
         }
@@ -33,6 +37,7 @@ class AnalyticsBackground extends System.ServiceDelegate {
         System.println("Analytics batch sent, responseCode: " + responseCode + " data: " + data);
         if (responseCode == 200) {
             Storage.deleteValue(QUEUE_KEY);
+            Storage.deleteValue(LATEST_SETTINGS_KEY);
         }
         Background.exit(null);
     }

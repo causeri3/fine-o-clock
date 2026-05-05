@@ -50,11 +50,7 @@ class finoclockApp extends Application.AppBase {
         Settings.getProperties();
         Log.debug("BEFORE trackin settings");
         Log.showMemoryUsage();
-        analytics.track("settings", 
-        // they both crashed with OOM, but sometimes some settings went through. Counldt reproduce though
-        Settings.getPropertiesAsString()
-        //"str: smokeField:3|bubbleField:5|cupField:2|bodyField:1|batteryField:12|stressThreshold:50|caloriesGoal:2000|stepsGoal:10000|animationSetting:true|basePicFireSetting:false"
-        );
+        analytics.trackSettings(Settings.getPropertiesAsString());
         Log.debug("AFTER trackin settings");
         Log.showMemoryUsage();
         WatchUi.requestUpdate();
