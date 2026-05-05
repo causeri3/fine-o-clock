@@ -23,9 +23,9 @@ class finoclockApp extends Application.AppBase {
         Storage.setValue("partNumber", settings.partNumber);
 
         // fire every six hours, to check if this day was used
-        //Background.registerForTemporalEvent(new Time.Duration(6 * 60 * 60));
+        Background.registerForTemporalEvent(new Time.Duration(6 * 60 * 60));
         // fire every 5 minutes for testing
-        Background.registerForTemporalEvent(new Time.Duration(5*60));
+        //Background.registerForTemporalEvent(new Time.Duration(5*60));
     }
 
     function onAppInstall() as Void {
