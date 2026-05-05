@@ -1,6 +1,8 @@
 import Toybox.Application;
 import Toybox.Lang;
 import Toybox.WatchUi;
+import Toybox.System;
+
 
 module Settings {
     var smokeSetting;
@@ -15,27 +17,27 @@ module Settings {
     var basePicFireSetting;
 
 
-function getOrDefault(key, defaultValue, expectedType) {
-    var value = Application.Properties.getValue(key);
-    return (value != null && value instanceof expectedType) ? value : defaultValue;
-}
+    function getOrDefault(key, defaultValue, expectedType) {
+        var value = Application.Properties.getValue(key);
+        return (value != null && value instanceof expectedType) ? value : defaultValue;
+    }
 // default values are workaround for non-reproducable (in the simulator) crash: 
 // Error: Unexpected Type Error\n- **Details**: Failed invoking <symbol>
 // Affected Firmware: 006-B4261-00 (14.15), 006-B3838-00 (5.10), 006-B3704-00 (19.05), 006-B3703-00 (19.05), 006-B3536-00 (8.00), 006-B4532-00 (15.32)
 // in line: var fieldResource = getFieldResource(fieldId);
 
-function getProperties() {
-    smokeSetting = getOrDefault("smokeField", 4, Lang.Number);
-    bodySetting = getOrDefault("bodyField", 1, Lang.Number);
-    bubbleSetting = getOrDefault("bubbleField", 5, Lang.Number);
-    cupSetting = getOrDefault("cupField", 2, Lang.Number);
-    batterySetting = getOrDefault("batteryField", 12,  Lang.Number);
-    stressScoreSetting = getOrDefault("stressThreshold", 50, Lang.Number);
-    caloriesGoal = getOrDefault("caloriesGoal", 2000, Lang.Number);
-    stepsGoal = getOrDefault("stepsGoal", 10000, Lang.Number);
-    animationSetting = getOrDefault("animationSetting", true, Lang.Boolean);
-    basePicFireSetting = getOrDefault("basePicFireSetting", true, Lang.Boolean);
-}
+    function getProperties() {
+        smokeSetting = getOrDefault("smokeField", 4, Lang.Number);
+        bodySetting = getOrDefault("bodyField", 1, Lang.Number);
+        bubbleSetting = getOrDefault("bubbleField", 5, Lang.Number);
+        cupSetting = getOrDefault("cupField", 2, Lang.Number);
+        batterySetting = getOrDefault("batteryField", 12,  Lang.Number);
+        stressScoreSetting = getOrDefault("stressThreshold", 50, Lang.Number);
+        caloriesGoal = getOrDefault("caloriesGoal", 2000, Lang.Number);
+        stepsGoal = getOrDefault("stepsGoal", 10000, Lang.Number);
+        animationSetting = getOrDefault("animationSetting", true, Lang.Boolean);
+        basePicFireSetting = getOrDefault("basePicFireSetting", true, Lang.Boolean);
+    }
 
 
 
@@ -66,6 +68,62 @@ function getProperties() {
         var fieldResource = getFieldResource(fieldId);
         var fieldString = WatchUi.loadResource(fieldResource);
         return (fieldString != null) ? fieldString : "";
+    }
+
+
+// only used 7.5% more memory (648 instead of 600)as as string - wasnt the cause of the oom
+    //  function getPropertiesAsDict() as Dictionary {
+    //     Log.debug("BEFORE getPropertiesAsDict");
+    //     Log.showMemoryUsage();
+
+    //      var keys = [
+    //          "smokeField", "bubbleField", "cupField", "bodyField",
+    //          "batteryField", "stressThreshold", "caloriesGoal",
+    //          "stepsGoal", "animationSetting", "basePicFireSetting"
+    //      ];
+
+    //      var result = {} as Dictionary;
+
+    //      for (var i = 0; i < keys.size(); i++) {
+    //          System.println("Application.Properties.getValue(keys[i])" + Application.Properties.getValue(keys[i]));
+    //          var value = Application.Properties.getValue(keys[i]);
+    //          if (value != null) {
+    //              result[keys[i]] = value;
+    //          }
+    //      }
+    //      Log.debug("AFTER getPropertiesAsDict");
+    //      Log.showMemoryUsage();
+    //      return result;
+    //  }
+
+
+    function getPropertiesAsString() as String {
+        Log.debug("BEFORE cgetPropertiesAsString");
+        Log.showMemoryUsage();
+
+        var keys = [
+            "smokeField", "bubbleField", "cupField", "bodyField",
+            "batteryField", "stressThreshold", "caloriesGoal",
+            "stepsGoal", "animationSetting", "basePicFireSetting"
+        ];
+
+        var result = "";
+
+        for (var i = 0; i < keys.size(); i++) {
+            var value = Application.Properties.getValue(keys[i]);
+
+            if (value != null) {
+                if (result != "") {
+                    result += "|";
+                }
+                result += keys[i] + ":" + value;
+            }
+        }
+        Log.debug("getPropertiesAsString result: " + result);
+
+        Log.debug("AFTER getPropertiesAsString");
+        Log.showMemoryUsage();
+        return result;
     }
 
 }
