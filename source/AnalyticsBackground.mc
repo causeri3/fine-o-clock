@@ -42,20 +42,8 @@ class AnalyticsBackground extends System.ServiceDelegate {
         var lastTracked = Storage.getValue("lastActiveDayTs");
         if (lastTracked == null || (lastTracked as Number) < today) {
             Storage.setValue("lastActiveDayTs", today);
-            _enqueue("daily_active");
+            var analytics = new Analytics();
+            analytics.track("daily_active", null); // uses the capped _enqueue
         }
-    }
-
-    function _enqueue(eventType as String) as Void {
-        var queue = Storage.getValue(QUEUE_KEY) as Array or Null;
-        if (queue == null) { queue = []; }
-        queue.add({
-            "event"       => eventType,
-            "device_id"  => Storage.getValue("deviceId") as String or Null,
-            "part_no"=> Storage.getValue("partNumber") as String or Null,
-            "ts"         => Time.now().value(),
-            "data" => ""
-        });
-        Storage.setValue(QUEUE_KEY, queue);
     }
 }
