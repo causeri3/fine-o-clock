@@ -71,59 +71,54 @@ module Settings {
     }
 
 
-// only used 7.5% more memory (648 instead of 600)as as string - wasnt the cause of the oom
-    //  function getPropertiesAsDict() as Dictionary {
-    //     Log.debug("BEFORE getPropertiesAsDict");
-    //     Log.showMemoryUsage();
-
-    //      var keys = [
-    //          "smokeField", "bubbleField", "cupField", "bodyField",
-    //          "batteryField", "stressThreshold", "caloriesGoal",
-    //          "stepsGoal", "animationSetting", "basePicFireSetting"
-    //      ];
-
-    //      var result = {} as Dictionary;
-
-    //      for (var i = 0; i < keys.size(); i++) {
-    //          System.println("Application.Properties.getValue(keys[i])" + Application.Properties.getValue(keys[i]));
-    //          var value = Application.Properties.getValue(keys[i]);
-    //          if (value != null) {
-    //              result[keys[i]] = value;
-    //          }
-    //      }
-    //      Log.debug("AFTER getPropertiesAsDict");
-    //      Log.showMemoryUsage();
-    //      return result;
-    //  }
-
-
-    function getPropertiesAsString() as String {
-        Log.debug("BEFORE cgetPropertiesAsString");
+    function getPropertiesAsDict() as Dictionary {
+        Log.debug("BEFORE getPropertiesAsDict");
         Log.showMemoryUsage();
-
         var keys = [
             "smokeField", "bubbleField", "cupField", "bodyField",
             "batteryField", "stressThreshold", "caloriesGoal",
             "stepsGoal", "animationSetting", "basePicFireSetting"
         ];
-
-        var result = "";
-
+        var result = {} as Dictionary;
         for (var i = 0; i < keys.size(); i++) {
             var value = Application.Properties.getValue(keys[i]);
-
             if (value != null) {
-                if (result != "") {
-                    result += "|";
-                }
-                result += keys[i] + ":" + value;
+                result[keys[i]] = value;
             }
         }
-        Log.debug("getPropertiesAsString result: " + result);
-
-        Log.debug("AFTER getPropertiesAsString");
+        Log.debug("AFTER getPropertiesAsDict");
         Log.showMemoryUsage();
         return result;
     }
+
+
+//     function getPropertiesAsString() as String {
+//         Log.debug("BEFORE cgetPropertiesAsString");
+//         Log.showMemoryUsage();
+
+//         var keys = [
+//             "smokeField", "bubbleField", "cupField", "bodyField",
+//             "batteryField", "stressThreshold", "caloriesGoal",
+//             "stepsGoal", "animationSetting", "basePicFireSetting"
+//         ];
+
+//         var result = "";
+
+//         for (var i = 0; i < keys.size(); i++) {
+//             var value = Application.Properties.getValue(keys[i]);
+
+//             if (value != null) {
+//                 if (result != "") {
+//                     result += "|";
+//                 }
+//                 result += keys[i] + ":" + value;
+//             }
+//         }
+//         Log.debug("getPropertiesAsString result: " + result);
+
+//         Log.debug("AFTER getPropertiesAsString");
+//         Log.showMemoryUsage();
+//         return result;
+//     }
 
 }

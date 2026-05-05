@@ -50,7 +50,7 @@ serve(async (req: Request) => {
       part_no: String(e.part_no || "unknown"),
       event: String(e.event),
       ts: new Date(localMs).toISOString(),
-      data: e.data ? String(e.data) : ""};
+      data: (e.data && typeof e.data === 'object') ? e.data : null};
   });
 
   const { error } = await supabase

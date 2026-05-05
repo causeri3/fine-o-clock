@@ -4,7 +4,7 @@ CREATE TABLE finoclock (
   part_no TEXT DEFAULT 'unknown',
   event TEXT NOT NULL,
   ts TIMESTAMPTZ NOT NULL,
-  data TEXT DEFAULT '',
+  data JSONB DEFAULT NULL,
   created_at TIMESTAMPTZ DEFAULT now()
 );
 

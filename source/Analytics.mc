@@ -14,7 +14,7 @@ class Analytics {
     function initialize() {
     }
 
-    function trackSettings(data as String) as Void {
+    function trackSettings(data as Dictionary) as Void {
         var event = {
             "event"     => "settings",
             "device_id" => Storage.getValue("deviceId"),
