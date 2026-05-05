@@ -3,3 +3,8 @@ bin/
 python-helpers/
 .aider*
 screenshots/
+scratch
+.env
+supabase/.temp
+.idea
+.vscode
