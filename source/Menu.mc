@@ -132,11 +132,11 @@ class MenuDelegate extends WatchUi.Menu2InputDelegate {
     else if (id.equals("animationSetting")) {                                                                        
        toggleAnimation(item);                                                                                         
      }      
-    else if (id.equals("basePicFireSetting")) {                                                                        
-       toggleBasePic(item);                                                                                         
-     }    
+    else if (id.equals("basePicFireSetting")) {
+       toggleBasePic(item);
+     }
 
-     
+    (Application.getApp() as finoclockApp).analytics.trackSettings(Settings.getPropertiesAsDict());
   }
 
 //var validKeys as Null or Array<Number> = null;
