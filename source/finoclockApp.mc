@@ -7,25 +7,21 @@ import Toybox.Time;
 import Toybox.WatchUi;
 
 class finoclockApp extends Application.AppBase {
-    var analytics as Analytics;
+    var analytics = new Analytics();
 
     function initialize() {
         AppBase.initialize();
-        analytics = new Analytics();
     }
 
 
     function onStart(state as Dictionary?) as Void {
-        System.println("App onStart");
-
+        //System.println("App onStart");
         var settings = System.getDeviceSettings();
         Storage.setValue("deviceId", settings.uniqueIdentifier);
         Storage.setValue("partNumber", settings.partNumber);
+        // fire every six hours, to check if this day was used, also send settings changes, if stored
+        Background.registerForTemporalEvent(new Time.Duration(6*6*60));
 
-        // fire every six hours, to check if this day was used
-        Background.registerForTemporalEvent(new Time.Duration(6 * 60 * 60));
-        // fire every 5 minutes for testing
-        //Background.registerForTemporalEvent(new Time.Duration(5*60));
     }
 
     function onAppInstall() as Void {
@@ -46,24 +42,19 @@ class finoclockApp extends Application.AppBase {
     }
 
     function onSettingsChanged() as Void {
-        //Log.debug("Settings changed");
         Settings.getProperties();
-        Log.debug("BEFORE trackin settings");
-        Log.showMemoryUsage();
-        analytics.trackSettings(Settings.getPropertiesAsString());
-        Log.debug("AFTER trackin settings");
-        Log.showMemoryUsage();
+        analytics.trackSettings(Settings.getPropertiesAsDict());
         WatchUi.requestUpdate();
     }
 
     function getSettingsView() {
+        // free active bitmap from the watch face view before the Menu allocates,
+        // otherwise opening Menu OOMs on memory-constrained devices like descentmk2s.
+        if (ViewRef.view != null) { ViewRef.view.releaseHeavyResources(); }
         return [new Menu(), new MenuDelegate()];
     }
 
     function getServiceDelegate() {
         return [new AnalyticsBackground()];
-    }
-
-    function onBackgroundData(data as Application.PersistableType) as Void {
     }
 }
