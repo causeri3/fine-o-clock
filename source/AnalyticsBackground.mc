@@ -7,9 +7,9 @@ import Toybox.Time;
 
 (:background)
 class AnalyticsBackground extends System.ServiceDelegate {
-    var QUEUE_KEY = "eventQueue";
-    var LATEST_SETTINGS_KEY = "latestSettings";
-    var ENDPOINT = "https://tvsvdqiqfjywgzeozwxf.supabase.co/functions/v1/finoclock";
+    const QUEUE_KEY = "eventQueue";
+    const LATEST_SETTINGS_KEY = "latestSettings";
+    const ENDPOINT = "https://tvsvdqiqfjywgzeozwxf.supabase.co/functions/v1/finoclock";
 
     function initialize() {
         System.ServiceDelegate.initialize();
@@ -19,8 +19,16 @@ class AnalyticsBackground extends System.ServiceDelegate {
         _trackDailyActiveIfNeeded();
         var queue = Storage.getValue(QUEUE_KEY) as Array or Null;
         if (queue == null) { queue = []; }
-        var latestSettings = Storage.getValue(LATEST_SETTINGS_KEY);
-        if (latestSettings != null) { queue.add(latestSettings); }
+        var latestSettings = Storage.getValue(LATEST_SETTINGS_KEY) as Dictionary or Null;
+        if (latestSettings != null) {
+            var event = {
+                "event"     => "settings",
+                "device_id" => Storage.getValue("deviceId"),
+                "part_no"   => Storage.getValue("partNumber"),
+                "ts"        => Time.now().value(),
+                "data"      => latestSettings};
+            queue.add(event);
+        }
         if (queue.size() == 0) {
             Background.exit(null);
             return;
@@ -48,7 +56,7 @@ class AnalyticsBackground extends System.ServiceDelegate {
         if (lastTracked == null || (lastTracked as Number) < today) {
             Storage.setValue("lastActiveDayTs", today);
             var analytics = new Analytics();
-            analytics.track("daily_active", null); // uses the capped _enqueue
+            analytics.track("daily_active", null);
         }
     }
 }

@@ -15,13 +15,7 @@ class Analytics {
     }
 
     function trackSettings(data as Dictionary) as Void {
-        var event = {
-            "event"     => "settings",
-            "device_id" => Storage.getValue("deviceId"),
-            "part_no"   => Storage.getValue("partNumber"),
-            "ts"        => Time.now().value(),
-            "data"      => data};
-        Storage.setValue(LATEST_SETTINGS_KEY, event);
+        Storage.setValue(LATEST_SETTINGS_KEY, data);
     }
 
     function track(eventType as String, data as String or Dictionary or Null) as Void  {
