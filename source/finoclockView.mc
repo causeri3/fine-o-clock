@@ -42,7 +42,7 @@ class finoclockView extends WatchUi.WatchFace{
     // the state of this View and prepare it to be shown. This includes
     // loading resources into memory.
     function onShow() as Void {
-        Log.showMemoryUsage();
+        // Log.showMemoryUsage();
         // After the menu closes, defer the bitmap reload so the GC has time
         if (reloadPending && reloadTimer == null) {
             reloadTimer = new Timer.Timer();

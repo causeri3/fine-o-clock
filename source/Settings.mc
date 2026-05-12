@@ -72,8 +72,6 @@ module Settings {
 
 
     function getPropertiesAsDict() as Dictionary {
-        Log.debug("BEFORE getPropertiesAsDict");
-        Log.showMemoryUsage();
         var keys = [
             "smokeField", "bubbleField", "cupField", "bodyField",
             "batteryField", "stressThreshold", "caloriesGoal",
@@ -86,39 +84,7 @@ module Settings {
                 result[keys[i]] = value;
             }
         }
-        Log.debug("AFTER getPropertiesAsDict");
-        Log.showMemoryUsage();
         return result;
     }
-
-
-//     function getPropertiesAsString() as String {
-//         Log.debug("BEFORE cgetPropertiesAsString");
-//         Log.showMemoryUsage();
-
-//         var keys = [
-//             "smokeField", "bubbleField", "cupField", "bodyField",
-//             "batteryField", "stressThreshold", "caloriesGoal",
-//             "stepsGoal", "animationSetting", "basePicFireSetting"
-//         ];
-
-//         var result = "";
-
-//         for (var i = 0; i < keys.size(); i++) {
-//             var value = Application.Properties.getValue(keys[i]);
-
-//             if (value != null) {
-//                 if (result != "") {
-//                     result += "|";
-//                 }
-//                 result += keys[i] + ":" + value;
-//             }
-//         }
-//         Log.debug("getPropertiesAsString result: " + result);
-
-//         Log.debug("AFTER getPropertiesAsString");
-//         Log.showMemoryUsage();
-//         return result;
-//     }
 
 }
