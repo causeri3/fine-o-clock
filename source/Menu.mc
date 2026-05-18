@@ -5,6 +5,10 @@ import Toybox.Lang;
 class Menu extends WatchUi.Menu2 {
 
   function initialize() {
+    // getSettingsView() can be reached on background-service apps without
+    // onLayout having run (the only other site that calls getProperties),
+    // leaving Settings fields null and crashing add_items.
+    Settings.getProperties();
     Menu2.initialize({ :title => "Settings"});
     add_items();
   }
