@@ -1,4 +1,3 @@
-import Toybox.Application.Storage;
 import Toybox.Background;
 import Toybox.Communications;
 import Toybox.Lang;
@@ -17,14 +16,14 @@ class AnalyticsBackground extends System.ServiceDelegate {
 
     function onTemporalEvent() as Void {
         _trackDailyActiveIfNeeded();
-        var queue = Storage.getValue(QUEUE_KEY) as Array or Null;
+        var queue = SafeStorage.getValue(QUEUE_KEY) as Array or Null;
         if (queue == null) { queue = []; }
-        var latestSettings = Storage.getValue(LATEST_SETTINGS_KEY) as Dictionary or Null;
+        var latestSettings = SafeStorage.getValue(LATEST_SETTINGS_KEY) as Dictionary or Null;
         if (latestSettings != null) {
             var event = {
                 "event"     => "settings",
-                "device_id" => Storage.getValue("deviceId"),
-                "part_no"   => Storage.getValue("partNumber"),
+                "device_id" => SafeStorage.getValue("deviceId"),
+                "part_no"   => SafeStorage.getValue("partNumber"),
                 "ts"        => Time.now().value(),
                 "data"      => latestSettings};
             queue.add(event);
@@ -44,19 +43,21 @@ class AnalyticsBackground extends System.ServiceDelegate {
     function onBatchComplete(responseCode as Number, data as Dictionary or String or Null) as Void {
         System.println("Analytics batch sent, responseCode: " + responseCode + " data: " + data);
         if (responseCode == 200) {
-            Storage.deleteValue(QUEUE_KEY);
-            Storage.deleteValue(LATEST_SETTINGS_KEY);
+            SafeStorage.deleteValue(QUEUE_KEY);
+            SafeStorage.deleteValue(LATEST_SETTINGS_KEY);
         }
         Background.exit(null);
     }
 
     function _trackDailyActiveIfNeeded() as Void {
         var today = Time.today().value();
-        var lastTracked = Storage.getValue("lastActiveDayTs");
+        var lastTracked = SafeStorage.getValue("lastActiveDayTs");
         if (lastTracked == null || (lastTracked as Number) < today) {
-            Storage.setValue("lastActiveDayTs", today);
-            var analytics = new Analytics();
-            analytics.track("daily_active", null);
+            // Gate the enqueue on the marker write so we don't re-emit
+            // daily_active every background tick if the write failed.
+            if (SafeStorage.setValue("lastActiveDayTs", today)) {
+                new Analytics().track("daily_active", null);
+            }
         }
     }
 }

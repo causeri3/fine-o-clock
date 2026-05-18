@@ -1,6 +1,5 @@
 
 import Toybox.Application;
-import Toybox.Application.Storage;
 import Toybox.Background;
 import Toybox.Lang;
 import Toybox.Time;
@@ -17,20 +16,25 @@ class finoclockApp extends Application.AppBase {
     function onStart(state as Dictionary?) as Void {
         //System.println("App onStart");
         var settings = System.getDeviceSettings();
-        Storage.setValue("deviceId", settings.uniqueIdentifier);
-        Storage.setValue("partNumber", settings.partNumber);
+        SafeStorage.setValue("deviceId", settings.uniqueIdentifier);
+        SafeStorage.setValue("partNumber", settings.partNumber);
         // fire every six hours, to check if this day was used, also send settings changes, if stored
-        Background.registerForTemporalEvent(new Time.Duration(6*6*60));
+        Background.registerForTemporalEvent(new Time.Duration(6*60*60));
 
     }
 
     function onAppInstall() as Void {
-        analytics.track("install", null);
-        Background.exit(null);
+        //System.println("onAppInstall");
+        analytics.trackImmediate("install", null, method(:onAnalyticsSent));
     }
 
     function onAppUpdate() as Void {
-        analytics.track("update", null);
+        //System.println("onAppUpdate");
+        analytics.trackImmediate("update", null, method(:onAnalyticsSent));
+    }
+
+    function onAnalyticsSent(responseCode as Number, data as Dictionary or String or Null) as Void {
+        System.println("finoclockApp.onAnalyticsSent responseCode=" + responseCode + " data=" + data);
         Background.exit(null);
     }
 
