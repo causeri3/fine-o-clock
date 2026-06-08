@@ -45,9 +45,15 @@ class finoclockView extends WatchUi.WatchFace{
         // Log.showMemoryUsage();
         // After the menu closes, defer the bitmap reload so the GC has time
         if (reloadPending && reloadTimer == null) {
-            reloadTimer = new Timer.Timer();
-            // 50 is shortest time possible in method, its enough to prevent parallel loaading in memeory
-            reloadTimer.start(method(:onReloadReady), 50, false);
+            try {
+                reloadTimer = new Timer.Timer();
+                // 50 is shortest time possible in method, its enough to prevent parallel loaading in memeory
+                reloadTimer.start(method(:onReloadReady), 50, false);
+            } catch (e) {
+                // in case outside high-power mode: Can only start a timer in high-power mode
+                reloadTimer = null;
+                onReloadReady();
+            }
         }
 
         // bugfix, if onShow and in sleep: timer.start() leads to
